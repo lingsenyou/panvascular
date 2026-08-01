@@ -3,14 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Panvascular Radar — live literature at the medicine × engineering frontier</title>
-<meta name="description" content="A live literature radar for panvascular interventional research: intravascular imaging, bioresorbable scaffolds, flexible electronics, digital twins and AI-guided intervention. Every record is queried in real time from OpenAlex and links to its DOI.">
+<title>Panvascular Radar — auditable literature at the medicine × engineering frontier</title>
+<meta name="description" content="A live, DOI-linked literature radar for panvascular interventional research, powered by OpenAlex discovery and transparent Crossref metadata checks.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://lingsenyou.github.io/panvascular/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Panvascular Radar — live literature at the medicine × engineering frontier">
-<meta property="og:description" content="Real-time queries against OpenAlex. Every record links to its DOI. No stored corpus, no generated summaries.">
+<meta property="og:title" content="Panvascular Radar — auditable literature at the medicine × engineering frontier">
+<meta property="og:description" content="Live scholarly discovery from OpenAlex, DOI links and transparent Crossref metadata checks, with no generated summaries.">
 <meta property="og:url" content="https://lingsenyou.github.io/panvascular/">
+<meta property="og:image" content="https://lingsenyou.github.io/panvascular/og.png">
+<meta property="og:image:width" content="1731">
+<meta property="og:image:height" content="909">
+<meta property="og:image:alt" content="An abstract vascular network crossed by literature markers and radar rings">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f2f7fb">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88'%3E%F0%9F%93%A1%3C/text%3E%3C/svg%3E">
 <style>
@@ -162,6 +167,8 @@
   .filters label{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
   .filters select{font:inherit;font-size:.84rem;color:var(--ink);background:var(--surface-2);border:1px solid var(--line-strong);border-radius:7px;padding:6px 9px}
   .oa-toggle{display:inline-flex;align-items:center;gap:6px;font-size:.84rem;color:var(--ink-soft);cursor:pointer}
+  .searchhint{margin:10px 1px 0;color:var(--ink-faint);font-size:.76rem;line-height:1.45}
+  .searchhint strong{color:var(--ink-soft)}
 
   /* lenses */
   .lenses{margin-top:16px}
@@ -185,6 +192,7 @@
   .meta{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:26px 0 12px}
   .meta h2{font-size:1.02rem;font-weight:800}
   .meta .count{font-family:var(--mono);font-size:.76rem;color:var(--ink-faint)}
+  .sharesearch{margin-left:auto}
   .list{display:flex;flex-direction:column;gap:10px}
   .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:15px 17px;transition:border-color .15s ease, box-shadow .15s ease;position:relative}
   .card:hover{border-color:var(--cyan-vivid);box-shadow:0 10px 26px -16px rgba(11,111,184,.45)}
@@ -199,10 +207,17 @@
   .tag.scholar{color:var(--blue);border-color:var(--line-strong);text-decoration:none;font-weight:600}
   .tag.scholar:hover{border-color:var(--blue);background:var(--blue-wash)}
   .tag.oa{color:var(--green);border-color:var(--green);background:var(--green-wash);font-weight:700}
+  .tag.verified{color:var(--green);border-color:var(--green);background:var(--green-wash);font-weight:700}
+  .tag.warn{color:#b5364f;border-color:#c4485c;background:color-mix(in srgb,#c4485c 10%,var(--surface));font-weight:800}
+  .tag.source{color:var(--ink-soft);text-decoration:none}
+  .tag.source:hover{color:var(--blue-bright);border-color:var(--blue-bright)}
   .card .ab{font-size:.87rem;color:var(--ink-soft);margin-top:9px;display:none}
   .card .ab.on{display:block}
   .card .more{font:inherit;font-size:.76rem;font-family:var(--mono);background:none;border:none;color:var(--blue-bright);cursor:pointer;padding:6px 0 0;text-decoration:underline}
   .doi{font-family:var(--mono);font-size:.7rem;color:var(--ink-faint);word-break:break-all}
+  .card-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:9px}
+  .copycite{font:inherit;font-family:var(--mono);font-size:.7rem;color:var(--blue-bright);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+  .copycite[data-copied="true"]{color:var(--green)}
 
   .state{background:var(--surface);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:26px;text-align:center;color:var(--ink-soft);font-size:.93rem}
   .state.err{border-color:#c4485c;color:#c4485c}
@@ -251,12 +266,12 @@
       <p>
         A focused reading instrument for the intersection of interventional cardiology and engineering:
         intravascular imaging, bioresorbable scaffolds, flexible electronics, digital twins and AI in
-        coronary imaging. Every record below is fetched in real time and carries its DOI, so anything you
-        see can be checked at the source.
+        coronary imaging. Records are discovered live, restricted to DOI-bearing works, and checked against
+        Crossref so their identity and source metadata can be audited.
       </p>
       <span class="provenance">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Live query · OpenAlex · no stored corpus · no generated summaries
+        Live discovery · DOI linked · Crossref checked · no generated summaries
       </span>
     </div>
 
@@ -275,14 +290,14 @@
 
   <section class="searchbox">
     <form class="srow" id="searchForm">
-      <input id="q" type="search" autocomplete="off" placeholder='Search titles and abstracts. Quote a phrase for precision, e.g. "stent malapposition" AND "optical coherence tomography"' aria-label="Search query">
+      <input id="q" type="search" autocomplete="off" required maxlength="500" placeholder='Search scholarly works. Quote a phrase for precision, e.g. "stent malapposition" AND "optical coherence tomography"' aria-label="Search query">
       <button class="btn" id="goBtn" type="submit">Search</button>
     </form>
     <div class="filters">
       <label for="sort">Sort</label>
       <select id="sort">
         <option value="relevance">Relevance</option>
-        <option value="cited_by_count:desc">Most cited</option>
+        <option value="page_citations">Citations within relevant results</option>
         <option value="publication_date:desc">Newest</option>
       </select>
       <label for="since">Since</label>
@@ -293,6 +308,11 @@
         <option value="2020-01-01">2020</option>
       </select>
       <label class="oa-toggle" for="oaOnly"><input type="checkbox" id="oaOnly"> Open access only</label>
+    </div>
+    <div class="searchhint">
+      <strong>Transparent ranking:</strong> relevance is supplied by OpenAlex. The citation option reorders each
+      relevance-ranked page rather than pulling weakly related, highly cited records to the top. DOI registration
+      verifies a record's identity, not its evidence quality.
     </div>
     <div class="lenses">
       <div class="lab">Curated lenses</div>
@@ -317,7 +337,8 @@
 
   <div class="meta">
     <h2 id="resultsTitle">Results</h2>
-    <span class="count" id="resultsCount"></span>
+    <span class="count" id="resultsCount" aria-live="polite"></span>
+    <button class="chip sharesearch" id="shareSearch" type="button">Copy search link</button>
   </div>
   <div class="list" id="list"></div>
   <button class="btn loadmore" id="loadMore" type="button" style="display:none">Load more</button>
@@ -329,21 +350,23 @@
     <p>
       <strong>Where the data comes from.</strong> Records are queried live from the
       <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> API, an open index of
-      scholarly works released under CC0, and each entry links to its DOI so the source can be verified.
-      This page stores no corpus of its own, ranks nothing by hand, and produces no machine-written summaries.
+      scholarly works released under CC0. Only DOI-bearing records are shown. Crossref is then used to verify
+      the DOI and, where available, correct the title, byline, journal and publication year. This page stores
+      no corpus of its own and produces no machine-written summaries. A DOI missing from Crossref may belong
+      to another registration agency, so the page reports that status instead of silently treating it as verified.
     </p>
     <p>
       <strong>On citation counts.</strong> Indexes genuinely disagree, so each figure carries the name of
       the index that produced it. Where a DOI is present the
       <a href="https://www.crossref.org" target="_blank" rel="noopener">Crossref</a> cited-by tally is
-      fetched as well, which usually runs a little ahead of OpenAlex. Google Scholar counts higher again
-      because it also sweeps preprints, theses and unindexed venues, but it publishes no API and its terms
-      forbid automated collection, so it is never queried here. The Scholar link on each record simply
-      hands the search to Google Scholar so its number can be read at the source.
+       fetched as well. Either index may be higher because their coverage and update schedules differ.
+       Google Scholar is never collected automatically; the Scholar link simply hands the title to its public
+       search so readers can inspect that source themselves.
     </p>
     <p>
       Built and maintained by <a href="https://lingsenyou.github.io/">Lingsen You</a>, Zhongshan Hospital,
-      Fudan University. Query endpoint: <code>api.openalex.org/works</code>.
+      Fudan University. Query endpoint: <code>api.openalex.org/works</code>. This static public version uses
+      OpenAlex's no-key allowance, so temporary rate limiting is possible during heavy use.
     </p>
   </div>
 </footer>
@@ -357,13 +380,12 @@
   var SELECT = [
     "id","doi","display_name","publication_year","publication_date",
     "cited_by_count","open_access","primary_location","authorships","type",
-    "abstract_inverted_index"
+    "abstract_inverted_index","relevance_score","is_retracted","language"
   ].join(",");
   var PER_PAGE = 20;
 
-  /* Lens queries are exact-phrase boolean expressions run against titles and abstracts.
-     Each was checked against a most-cited sort so the landmark papers of the field, not
-     merely high-citation papers that mention a word in passing, come back first. */
+  /* Lens queries combine exact phrases and field terms. OpenAlex searches its indexed
+     scholarly text and supplies the relevance score; the interface does not hand-rank papers. */
   var LENSES = [
     { key:"suitcordance", label:"Suitcordance",
       q:'suitcordance' },
@@ -374,20 +396,23 @@
     { key:"dcb",          label:"Drug-coated balloons",
       q:'"drug-coated balloon" OR "drug-eluting balloon" OR "paclitaxel-coated balloon" OR "sirolimus-coated balloon"' },
     { key:"flex",         label:"Flexible electronics",
-      q:'("flexible electronics" OR "stretchable electronics" OR "wearable sensor" OR "flexible sensor") AND (cardiovascular OR cardiac OR vascular)' },
+      q:'"flexible cardiovascular sensor" OR "flexible cardiac sensor" OR "flexible vascular sensor" OR "stretchable cardiac sensor" OR "epicardial electronics" OR "vascular electronic device"' },
     { key:"dt",           label:"Digital twins",
-      q:'"cardiac digital twin" OR ("digital twin" AND (coronary OR cardiovascular OR hemodynamic))' },
+      q:'"cardiac digital twin" OR "cardiovascular digital twin" OR "coronary digital twin" OR "hemodynamic digital twin"' },
     { key:"ai",           label:"AI in coronary imaging",
-      q:'("deep learning" OR "convolutional neural network") AND ("coronary angiography" OR "coronary computed tomography" OR "percutaneous coronary intervention" OR "coronary artery calcium")' },
+      q:'"deep learning coronary angiography" OR "deep learning coronary computed tomography" OR "convolutional neural network coronary angiography" OR "deep learning percutaneous coronary intervention" OR "deep learning coronary artery calcium"' },
     { key:"chip",         label:"Vessel-on-a-chip",
-      q:'"vessel-on-a-chip" OR "vasculature-on-a-chip" OR ("organ-on-a-chip" AND (vascular OR endothelial))' }
+      q:'"vessel-on-a-chip" OR "vasculature-on-a-chip" OR "vascular organ-on-a-chip" OR "vascularized organ-on-a-chip"' }
   ];
 
   var $ = function(id){ return document.getElementById(id); };
   var listEl = $("list"), countEl = $("resultsCount"), titleEl = $("resultsTitle");
   var qEl = $("q"), sortEl = $("sort"), sinceEl = $("since"), oaEl = $("oaOnly");
-  var moreBtn = $("loadMore"), goBtn = $("goBtn");
-  var state = { q:"", page:1, total:0, loading:false, activeLens:null };
+  var moreBtn = $("loadMore"), goBtn = $("goBtn"), shareBtn = $("shareSearch");
+  var state = { q:"", page:1, total:0, loading:false, activeLens:null, seen:{} };
+  var requestSeq = 0;
+  var searchController = null;
+  var crossrefController = null;
 
   /* theme */
   var root = document.documentElement;
@@ -423,25 +448,24 @@
     return Number(n).toLocaleString("en-US");
   }
 
-  /* A comma separates filters in the OpenAlex API, so it can never appear inside the
-     query itself. Commas typed by a reader become spaces rather than breaking the call. */
   function cleanQuery(s){
-    return String(s == null ? "" : s).replace(/,/g, " ").replace(/\s+/g, " ").trim();
+    return String(s == null ? "" : s).replace(/\s+/g, " ").trim();
   }
 
   function buildURL(opts){
-    var f = ["title_and_abstract.search:" + cleanQuery(opts.q)];
+    var f = ["has_doi:true"];
     if (opts.since)  f.push("from_publication_date:" + opts.since);
     if (opts.oaOnly) f.push("is_oa:true");
 
     var p = [];
+    p.push("search=" + encodeURIComponent(cleanQuery(opts.q)));
     p.push("filter=" + encodeURIComponent(f.join(",")));
     p.push("per-page=" + (opts.perPage || PER_PAGE));
     p.push("page=" + (opts.page || 1));
     p.push("select=" + SELECT);
     p.push("mailto=" + encodeURIComponent(MAILTO));
-    /* Relevance is the API default while searching, so it is left unset for that case. */
-    if (opts.sort && opts.sort !== "relevance") p.push("sort=" + encodeURIComponent(opts.sort));
+    if (opts.sort === "publication_date:desc") p.push("sort=publication_date%3Adesc");
+    else p.push("sort=relevance_score%3Adesc");
     return API + "?" + p.join("&");
   }
 
@@ -462,7 +486,7 @@
 
   function authorsOf(w){
     var a = (w.authorships || []).map(function(x){
-      return (x.author && x.author.display_name) ? x.author.display_name : null;
+      return x.raw_author_name || ((x.author && x.author.display_name) ? x.author.display_name : null);
     }).filter(Boolean);
     if (!a.length) return "Authors not listed in source record";
     if (a.length <= 4) return a.join(", ");
@@ -471,8 +495,64 @@
 
   function venueOf(w){
     var loc = w.primary_location;
+    if (loc && loc.raw_source_name) return loc.raw_source_name;
     if (loc && loc.source && loc.source.display_name) return loc.source.display_name;
     return null;
+  }
+
+  function bareDoiOf(value){
+    return value ? String(value).replace(/^https?:\/\/(dx\.)?doi\.org\//i, "").trim().toLowerCase() : "";
+  }
+
+  function plainText(value){
+    return String(value == null ? "" : value).replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+  }
+
+  function titleKey(value){
+    return plainText(value).toLowerCase().replace(/[^a-z0-9\u00c0-\u024f\u4e00-\u9fff]+/g, " ").trim();
+  }
+
+  function dedupeWorks(results, reset){
+    if (reset) state.seen = {};
+    return (results || []).filter(function(w){
+      var doi = bareDoiOf(w.doi);
+      var key = doi ? "doi:" + doi : "title:" + titleKey(w.display_name);
+      if (!key || state.seen[key]) return false;
+      state.seen[key] = true;
+      return true;
+    });
+  }
+
+  function crossrefAuthors(item){
+    var names = (item.author || []).map(function(a){
+      return [a.given, a.family].filter(Boolean).join(" ").trim();
+    }).filter(Boolean);
+    if (!names.length) return null;
+    if (names.length <= 4) return names.join(", ");
+    return names.slice(0,3).join(", ") + ", … " + names[names.length-1] + " (" + names.length + " authors)";
+  }
+
+  function crossrefYear(item){
+    var parts = item.published && item.published["date-parts"] && item.published["date-parts"][0];
+    return parts && parts[0] ? String(parts[0]) : null;
+  }
+
+  function citationOf(item, card){
+    var authorList = (item && item.author || []).map(function(a){
+      return [a.family, a.given].filter(Boolean).join(", ");
+    }).filter(Boolean);
+    if (authorList.length > 6) authorList = authorList.slice(0,6).concat(["et al."]);
+    var authors = authorList.length ? authorList.join("; ") : card.querySelector(".au").textContent.trim();
+    var year = item ? crossrefYear(item) : null;
+    var title = item && item.title && item.title[0] ? plainText(item.title[0]) : plainText(card.querySelector(".t").textContent);
+    var venue = item && item["container-title"] && item["container-title"][0] ? plainText(item["container-title"][0]) : (card.querySelector(".venue") ? card.querySelector(".venue").textContent.trim() : "");
+    if (item){
+      var volumeIssue = item.volume ? String(item.volume) + (item.issue ? "(" + item.issue + ")" : "") : "";
+      var locator = [volumeIssue, item.page ? String(item.page) : ""].filter(Boolean).join(":");
+      if (locator) venue += (venue ? " " : "") + locator;
+    }
+    var doi = card.getAttribute("data-doi");
+    return [authors, year ? "(" + year + ")." : "", title + ".", venue ? venue + "." : "", doi ? "https://doi.org/" + doi : ""].filter(Boolean).join(" ").replace(/\s+/g," ").trim();
   }
 
   function cardHTML(w, idx){
@@ -482,16 +562,21 @@
     var abs = abstractOf(w);
     var isOA = w.open_access && w.open_access.is_oa;
 
-    var bareDoi = doi ? String(doi).replace(/^https?:\/\/(dx\.)?doi\.org\//i, "") : null;
+    var bareDoi = bareDoiOf(doi);
 
     var tags = "";
     if (venue) tags += '<span class="tag venue" title="' + esc(venue) + '">' + esc(venue) + '</span>';
-    if (w.publication_year) tags += '<span class="tag num">' + esc(w.publication_year) + '</span>';
+    if (w.publication_year) tags += '<span class="tag num year">' + esc(w.publication_year) + '</span>';
     /* Indexes disagree on citation counts, so each is shown with its source named. */
     tags += '<span class="tag cite num">' + fmtNum(w.cited_by_count) + ' <s>OpenAlex</s></span>';
     if (bareDoi) tags += '<span class="tag cite num xref" data-doi="' + esc(bareDoi) + '" hidden></span>';
+    if (bareDoi) tags += '<span class="tag verified" hidden>Crossref registered</span>';
+    if (bareDoi) tags += '<span class="tag source xrefstatus" hidden></span>';
     if (isOA) tags += '<span class="tag oa">Open access</span>';
+    if (w.is_retracted) tags += '<span class="tag warn">Retracted</span>';
     if (w.type) tags += '<span class="tag">' + esc(String(w.type).replace(/-/g," ")) + '</span>';
+    if (w.id) tags += '<a class="tag source" target="_blank" rel="noopener" href="' + esc(w.id) + '">OpenAlex record &#8599;</a>';
+    if (bareDoi) tags += '<a class="tag source" target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/?term=' + encodeURIComponent(bareDoi) + '">PubMed &#8599;</a>';
     tags += '<a class="tag scholar" target="_blank" rel="noopener" href="https://scholar.google.com/scholar?q=' +
             encodeURIComponent(String(w.display_name || "").replace(/<[^>]*>/g, "")) +
             '">Scholar &#8599;</a>';
@@ -505,50 +590,104 @@
     }
 
     return '' +
-      '<article class="card">' +
+      '<article class="card" data-doi="' + esc(bareDoi) + '" data-openalex="' + esc(w.id || "") + '">' +
         '<a class="t" href="' + esc(href) + '" target="_blank" rel="noopener">' + rich(w.display_name || "Untitled record") + '</a>' +
         '<div class="au">' + esc(authorsOf(w)) + '</div>' +
         '<div class="ln">' + tags + '</div>' +
         absBlock +
-        (doi ? '<div class="ln"><span class="doi">' + esc(doi) + '</span></div>' : '') +
+        (doi ? '<div class="card-actions"><span class="doi">' + esc(doi) + '</span><button class="copycite" type="button">Copy citation</button></div>' : '') +
       '</article>';
   }
 
-  /* Crossref publishes its own cited-by tally, which often runs ahead of OpenAlex.
-     One batched call per page of results fills the second figure in; if Crossref is
-     unreachable the card simply keeps the OpenAlex number rather than showing a guess. */
-  function enrichWithCrossref(){
-    var pending = [].slice.call(listEl.querySelectorAll(".xref[data-doi]:not([data-done])"));
+  /* Crossref verifies the DOI and supplies registration metadata. OpenAlex remains the
+     discovery layer; Crossref corrects display fields only when it has a matching record. */
+  function enrichWithCrossref(runId){
+    var pending = [].slice.call(listEl.querySelectorAll(".card[data-doi]:not([data-crossref])"));
     if (!pending.length) return;
     var batch = pending.slice(0, 40);
-    var filter = batch.map(function(el){ return "doi:" + el.getAttribute("data-doi"); }).join(",");
+    var filter = batch.map(function(card){ return "doi:" + card.getAttribute("data-doi"); }).join(",");
     var url = "https://api.crossref.org/works?filter=" + encodeURIComponent(filter) +
-              "&rows=" + batch.length + "&select=DOI,is-referenced-by-count" +
+              "&rows=" + batch.length + "&select=DOI,is-referenced-by-count,title,container-title,published,author,volume,issue,page" +
               "&mailto=" + encodeURIComponent(MAILTO);
-    fetch(url)
+    if (crossrefController) crossrefController.abort();
+    crossrefController = typeof AbortController !== "undefined" ? new AbortController() : null;
+    fetch(url, crossrefController ? {signal:crossrefController.signal} : undefined)
       .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function(j){
+        if (runId !== requestSeq) return;
         var byDoi = {};
         ((j.message && j.message.items) || []).forEach(function(it){
-          if (it.DOI) byDoi[String(it.DOI).toLowerCase()] = it["is-referenced-by-count"];
+          if (it.DOI) byDoi[bareDoiOf(it.DOI)] = it;
         });
-        batch.forEach(function(el){
-          el.setAttribute("data-done","1");
-          var n = byDoi[String(el.getAttribute("data-doi")).toLowerCase()];
-          if (n == null) return;
-          el.innerHTML = fmtNum(n) + ' <s>Crossref</s>';
-          el.hidden = false;
+        batch.forEach(function(card){
+          if (!card.isConnected) return;
+          card.setAttribute("data-crossref","checked");
+          var item = byDoi[bareDoiOf(card.getAttribute("data-doi"))];
+          if (!item){
+            var missing = card.querySelector(".xrefstatus");
+            if (missing){
+              missing.textContent = "Not found in Crossref";
+              missing.hidden = false;
+            }
+            return;
+          }
+          var xref = card.querySelector(".xref");
+          if (xref && item["is-referenced-by-count"] != null){
+            xref.innerHTML = fmtNum(item["is-referenced-by-count"]) + ' <s>Crossref</s>';
+            xref.hidden = false;
+          }
+          var verified = card.querySelector(".verified");
+          if (verified) verified.hidden = false;
+          var authors = crossrefAuthors(item);
+          if (authors && card.querySelector(".au")) card.querySelector(".au").textContent = authors;
+          var venue = item["container-title"] && item["container-title"][0];
+          if (venue){
+            var venueEl = card.querySelector(".venue");
+            if (!venueEl && card.querySelector(".ln")){
+              venueEl = document.createElement("span");
+              venueEl.className = "tag venue";
+              card.querySelector(".ln").insertBefore(venueEl, card.querySelector(".ln").firstChild);
+            }
+            if (venueEl){
+              venueEl.textContent = plainText(venue);
+              venueEl.title = plainText(venue);
+            }
+          }
+          var year = crossrefYear(item);
+          if (year){
+            var yearEl = card.querySelector(".year");
+            if (!yearEl && card.querySelector(".ln")){
+              yearEl = document.createElement("span");
+              yearEl.className = "tag num year";
+              card.querySelector(".ln").appendChild(yearEl);
+            }
+            if (yearEl) yearEl.textContent = year;
+          }
+          var title = item.title && item.title[0];
+          if (title && card.querySelector(".t")) card.querySelector(".t").innerHTML = rich(title);
+          card.setAttribute("data-citation", citationOf(item, card));
         });
       })
-      .catch(function(){
-        batch.forEach(function(el){ el.setAttribute("data-done","1"); });
+      .catch(function(e){
+        if (e && e.name === "AbortError") return;
+        batch.forEach(function(card){
+          if (!card.isConnected) return;
+          card.setAttribute("data-crossref","unavailable");
+          var status = card.querySelector(".xrefstatus");
+          if (status){
+            status.textContent = "Crossref check unavailable";
+            status.hidden = false;
+          }
+        });
       });
   }
 
   function setLoading(on, append){
     state.loading = on;
-    goBtn.disabled = on;
-    goBtn.textContent = on ? "Searching…" : "Search";
+    goBtn.disabled = on && !append;
+    goBtn.textContent = on && !append ? "Searching…" : "Search";
+    moreBtn.disabled = on && append;
+    moreBtn.textContent = on && append ? "Loading…" : "Load more";
     if (on && !append){
       listEl.innerHTML = '<div class="skel"></div><div class="skel"></div><div class="skel"></div>';
       moreBtn.style.display = "none";
@@ -561,57 +700,125 @@
     moreBtn.style.display = "none";
   }
 
+  function copyText(value){
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(value);
+    return new Promise(function(resolve, reject){
+      var box = document.createElement("textarea");
+      box.value = value;
+      box.setAttribute("readonly", "");
+      box.style.position = "fixed";
+      box.style.opacity = "0";
+      document.body.appendChild(box);
+      box.select();
+      try {
+        if (!document.execCommand("copy")) throw new Error("Copy command was rejected");
+        resolve();
+      } catch (err){ reject(err); }
+      document.body.removeChild(box);
+    });
+  }
+
+  function syncURL(){
+    if (!window.history || !window.history.replaceState) return;
+    var u = new URL(window.location.href);
+    u.searchParams.set("q", state.q);
+    if (sortEl.value === "relevance") u.searchParams.delete("sort");
+    else u.searchParams.set("sort", sortEl.value);
+    if (sinceEl.value) u.searchParams.set("since", sinceEl.value);
+    else u.searchParams.delete("since");
+    if (oaEl.checked) u.searchParams.set("oa", "1");
+    else u.searchParams.delete("oa");
+    window.history.replaceState(null, "", u.pathname + "?" + u.searchParams.toString() + u.hash);
+  }
+
   function run(query, opts){
     opts = opts || {};
     var append = !!opts.append;
-    if (!query || !query.trim()){ return; }
+    query = cleanQuery(query);
+    if (!query){ qEl.focus(); return; }
+    if (searchController) searchController.abort();
+    if (crossrefController) crossrefController.abort();
+    searchController = typeof AbortController !== "undefined" ? new AbortController() : null;
+    var runId = ++requestSeq;
+    var targetPage = append ? state.page + 1 : 1;
     state.q = query;
-    state.page = append ? state.page + 1 : 1;
+    if (!append) state.seen = {};
     setLoading(true, append);
 
     var url = buildURL({
       q: query,
-      page: state.page,
+      page: targetPage,
       sort: sortEl.value,
       since: sinceEl.value,
       oaOnly: oaEl.checked
     });
 
-    fetch(url)
+    fetch(url, searchController ? {signal:searchController.signal} : undefined)
       .then(function(r){
         if (!r.ok) throw new Error("OpenAlex responded with status " + r.status);
         return r.json();
       })
       .then(function(j){
+        if (runId !== requestSeq) return;
         setLoading(false, append);
-        var results = j.results || [];
+        var results = dedupeWorks(j.results || [], false);
+        if (sortEl.value === "page_citations"){
+          results.sort(function(a,b){ return (b.cited_by_count || 0) - (a.cited_by_count || 0); });
+        }
+        state.page = targetPage;
         state.total = (j.meta && j.meta.count) || 0;
 
         titleEl.textContent = state.activeLens ? state.activeLens : "Results";
-        countEl.textContent = fmtNum(state.total) + " records in OpenAlex" +
-          (state.total > 0 ? " · showing " + fmtNum(Math.min(state.page * PER_PAGE, state.total)) : "");
+        var already = append ? listEl.querySelectorAll(".card").length : 0;
+        countEl.textContent = fmtNum(state.total) + " DOI-bearing records in OpenAlex" +
+          (state.total > 0 ? " · showing " + fmtNum(already + results.length) : "") +
+          (sortEl.value === "page_citations" ? " · current relevance page ordered by OpenAlex citations" : "");
 
         if (!results.length && !append){
           listEl.innerHTML = '<div class="state">Nothing matched that query in OpenAlex. ' +
             'Try broader wording, quote an exact phrase, or clear the year and open access filters.</div>';
+          moreBtn.style.display = "none";
+          syncURL();
           return;
         }
-        var base = append ? listEl.querySelectorAll(".card").length : 0;
+        var base = already;
         var html = results.map(function(w,i){ return cardHTML(w, base + i); }).join("");
         if (append) listEl.insertAdjacentHTML("beforeend", html);
         else listEl.innerHTML = html;
 
-        enrichWithCrossref();
+        enrichWithCrossref(runId);
         moreBtn.style.display = (state.page * PER_PAGE < state.total) ? "block" : "none";
+        syncURL();
       })
       .catch(function(e){
+        if (e && e.name === "AbortError") return;
+        if (runId !== requestSeq) return;
         setLoading(false, append);
+        if (append){
+          moreBtn.style.display = "block";
+          moreBtn.textContent = "Retry loading more";
+          return;
+        }
         showError("Could not reach OpenAlex just now (" + e.message + "). The service may be busy, or the network blocked the request. Please try again.");
       });
   }
 
-  /* abstract toggle */
+  /* card actions */
   listEl.addEventListener("click", function(e){
+    var copy = e.target.closest ? e.target.closest(".copycite") : null;
+    if (copy){
+      var card = copy.closest(".card");
+      if (!card) return;
+      var citation = card.getAttribute("data-citation") || citationOf(null, card);
+      copyText(citation).then(function(){
+        copy.textContent = "Copied";
+        window.setTimeout(function(){ copy.textContent = "Copy citation"; }, 1600);
+      }).catch(function(){
+        copy.textContent = "Copy failed";
+        window.setTimeout(function(){ copy.textContent = "Copy citation"; }, 1600);
+      });
+      return;
+    }
     var b = e.target.closest ? e.target.closest(".more") : null;
     if (!b) return;
     var el = document.getElementById(b.getAttribute("data-ab"));
@@ -650,6 +857,15 @@
     el.addEventListener("change", function(){ if (state.q) run(state.q); });
   });
   moreBtn.addEventListener("click", function(){ run(state.q, {append:true}); });
+  shareBtn.addEventListener("click", function(){
+    copyText(window.location.href).then(function(){
+      shareBtn.textContent = "Link copied";
+      window.setTimeout(function(){ shareBtn.textContent = "Copy search link"; }, 1600);
+    }).catch(function(){
+      shareBtn.textContent = "Copy failed";
+      window.setTimeout(function(){ shareBtn.textContent = "Copy search link"; }, 1600);
+    });
+  });
 
   /* concept tracker: real numbers, computed from the records themselves */
   (function tracker(){
@@ -659,36 +875,16 @@
       .then(function(j){
         var rs = j.results || [];
         var total = (j.meta && j.meta.count) || rs.length;
-        var cites = 0, oa = 0, first = null, dois = [];
+        var cites = 0, oa = 0, first = null;
         rs.forEach(function(w){
           cites += (w.cited_by_count || 0);
           if (w.open_access && w.open_access.is_oa) oa++;
           if (w.publication_year && (first === null || w.publication_year < first)) first = w.publication_year;
-          if (w.doi) dois.push(String(w.doi).replace(/^https?:\/\/(dx\.)?doi\.org\//i, ""));
         });
         $("tCount").textContent = fmtNum(total);
         $("tCites").textContent = fmtNum(cites);
         $("tFirst").textContent = first || "—";
         $("tOA").textContent = fmtNum(oa) + " / " + fmtNum(rs.length);
-
-        /* Crossref usually reports a higher tally; take it when every record resolves. */
-        if (!dois.length) return;
-        var f = dois.slice(0,40).map(function(d){ return "doi:" + d; }).join(",");
-        fetch("https://api.crossref.org/works?filter=" + encodeURIComponent(f) +
-              "&rows=" + Math.min(dois.length,40) + "&select=DOI,is-referenced-by-count&mailto=" + encodeURIComponent(MAILTO))
-          .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
-          .then(function(cj){
-            var items = (cj.message && cj.message.items) || [];
-            if (!items.length) return;
-            var sum = 0;
-            items.forEach(function(it){ sum += (it["is-referenced-by-count"] || 0); });
-            if (sum > cites){
-              $("tCites").textContent = fmtNum(sum);
-              var lab = $("tCites").nextElementSibling;
-              if (lab) lab.textContent = "citations · Crossref";
-            }
-          })
-          .catch(function(){});
       })
       .catch(function(){
         $("tstats").innerHTML = '<div class="tstat" style="color:var(--ink-faint);font-size:.86rem">' +
@@ -696,8 +892,21 @@
       });
   })();
 
-  /* first paint: show the signature lens so the page is never empty */
+  /* First paint accepts shareable search parameters; otherwise show the signature lens. */
   (function boot(){
+    var params = new URLSearchParams(window.location.search);
+    var sharedQuery = cleanQuery(params.get("q"));
+    if (sharedQuery){
+      var sharedSort = params.get("sort");
+      var sharedSince = params.get("since");
+      if (["relevance","page_citations","publication_date:desc"].indexOf(sharedSort) !== -1) sortEl.value = sharedSort;
+      if (["","2024-01-01","2022-01-01","2020-01-01"].indexOf(sharedSince || "") !== -1) sinceEl.value = sharedSince || "";
+      oaEl.checked = params.get("oa") === "1";
+      state.activeLens = null;
+      qEl.value = sharedQuery;
+      run(sharedQuery);
+      return;
+    }
     var first = LENSES[0];
     state.activeLens = first.label;
     qEl.value = first.q;
