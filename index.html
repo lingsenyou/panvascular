@@ -290,7 +290,7 @@
 
   <section class="searchbox">
     <form class="srow" id="searchForm">
-      <input id="q" type="search" autocomplete="off" required maxlength="500" placeholder='Search scholarly works. Quote a phrase for precision, e.g. "stent malapposition" AND "optical coherence tomography"' aria-label="Search query">
+      <input id="q" type="search" autocomplete="off" required maxlength="500" placeholder='Search titles and abstracts. Quote a phrase for precision, e.g. "stent malapposition" AND "optical coherence tomography"' aria-label="Search query">
       <button class="btn" id="goBtn" type="submit">Search</button>
     </form>
     <div class="filters">
@@ -312,7 +312,7 @@
     <div class="searchhint">
       <strong>Transparent ranking:</strong> relevance is supplied by OpenAlex. The citation option reorders each
       relevance-ranked page rather than pulling weakly related, highly cited records to the top. DOI registration
-      verifies a record's identity, not its evidence quality.
+      verifies a record's identity, not its evidence quality. Every result must match its indexed title or abstract.
     </div>
     <div class="lenses">
       <div class="lab">Curated lenses</div>
@@ -392,15 +392,15 @@
     { key:"ivi",          label:"Intravascular imaging",
       q:'"intravascular ultrasound" OR "intravascular imaging" OR "intracoronary imaging" OR "intravascular optical coherence tomography"' },
     { key:"brs",          label:"Bioresorbable scaffolds",
-      q:'"bioresorbable scaffold" OR "bioresorbable stent" OR "biodegradable stent" OR "bioabsorbable scaffold"' },
+      q:'"bioresorbable vascular scaffold" OR "bioresorbable coronary scaffold" OR "bioresorbable stent" OR "biodegradable vascular stent"' },
     { key:"dcb",          label:"Drug-coated balloons",
       q:'"drug-coated balloon" OR "drug-eluting balloon" OR "paclitaxel-coated balloon" OR "sirolimus-coated balloon"' },
     { key:"flex",         label:"Flexible electronics",
-      q:'"flexible cardiovascular sensor" OR "flexible cardiac sensor" OR "flexible vascular sensor" OR "stretchable cardiac sensor" OR "epicardial electronics" OR "vascular electronic device"' },
+      q:'("flexible electronics" OR "stretchable electronics" OR "epicardial electronics" OR "wearable cardiac sensor") AND (cardiac OR cardiovascular OR vascular)' },
     { key:"dt",           label:"Digital twins",
       q:'"cardiac digital twin" OR "cardiovascular digital twin" OR "coronary digital twin" OR "hemodynamic digital twin"' },
     { key:"ai",           label:"AI in coronary imaging",
-      q:'"deep learning coronary angiography" OR "deep learning coronary computed tomography" OR "convolutional neural network coronary angiography" OR "deep learning percutaneous coronary intervention" OR "deep learning coronary artery calcium"' },
+      q:'("deep learning" OR "convolutional neural network") AND ("coronary angiography" OR "coronary computed tomography" OR "percutaneous coronary intervention" OR "coronary artery calcium")' },
     { key:"chip",         label:"Vessel-on-a-chip",
       q:'"vessel-on-a-chip" OR "vasculature-on-a-chip" OR "vascular organ-on-a-chip" OR "vascularized organ-on-a-chip"' }
   ];
@@ -453,7 +453,10 @@
   }
 
   function buildURL(opts){
-    var f = ["has_doi:true"];
+    /* OpenAlex search supplies ranking, while this title/abstract filter prevents papers
+       that mention a term only in body text or references from entering the result set. */
+    var strictQuery = cleanQuery(opts.q).replace(/,/g, " ");
+    var f = ["has_doi:true", "title_and_abstract.search:" + strictQuery];
     if (opts.since)  f.push("from_publication_date:" + opts.since);
     if (opts.oaOnly) f.push("is_oa:true");
 
