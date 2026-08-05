@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lingsenyou.github.io/panvascular/sitemap.xml
+Sitemap: https://lucas-you.com/panvascular/sitemap.xml
