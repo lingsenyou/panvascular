@@ -3,21 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Panvascular Radar — auditable literature at the medicine × engineering frontier</title>
-<meta name="description" content="A live, DOI-linked literature radar for panvascular interventional research, powered by OpenAlex discovery and transparent Crossref metadata checks.">
+<title>Panvascular Radar — what is new at the medicine × engineering frontier</title>
+<meta name="description" content="A literature radar for panvascular interventional research: what published this week on intravascular imaging, bioresorbable scaffolds, drug-coated balloons, flexible electronics, digital twins and AI in coronary imaging. Live from PubMed, citation counts from OpenAlex, every record DOI-linked and exportable.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://lingsenyou.com/panvascular/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Panvascular Radar — auditable literature at the medicine × engineering frontier">
-<meta property="og:description" content="Live scholarly discovery from OpenAlex, DOI links and transparent Crossref metadata checks, with no generated summaries.">
+<meta property="og:title" content="Panvascular Radar — what is new at the medicine × engineering frontier">
+<meta property="og:description" content="What published this week across intravascular imaging, bioresorbable scaffolds, drug-coated balloons, flexible electronics, digital twins and AI in coronary imaging. DOI-linked, exportable, no generated summaries.">
 <meta property="og:url" content="https://lingsenyou.com/panvascular/">
-<meta property="og:image" content="https://lingsenyou.com/panvascular/og.png">
-<meta property="og:image:width" content="1731">
-<meta property="og:image:height" content="909">
+<meta property="og:image" content="https://lingsenyou.com/panvascular/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="An abstract vascular network crossed by literature markers and radar rings">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f2f7fb">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88'%3E%F0%9F%93%A1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://eutils.ncbi.nlm.nih.gov">
+<link rel="preconnect" href="https://api.openalex.org">
+<script>
+  /* Theme is read before first paint so a returning visitor never sees the wrong one. */
+  try {
+    var savedTheme = localStorage.getItem("pv:theme");
+    if (savedTheme === "dark" || savedTheme === "light") {
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    }
+  } catch (e) {}
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -26,10 +37,15 @@
   "url": "https://lingsenyou.com/panvascular/",
   "applicationCategory": "EducationalApplication",
   "operatingSystem": "Web",
-  "description": "A live, DOI-linked literature radar for panvascular interventional research, powered by OpenAlex discovery and transparent Crossref metadata checks.",
+  "description": "A literature radar for panvascular interventional research. Search runs live against PubMed; citation counts come from OpenAlex; every record links to its DOI and can be exported.",
   "author": { "@id": "https://lingsenyou.com/#person" },
   "isPartOf": { "@id": "https://lingsenyou.com/#website" },
-  "publisher": { "@id": "https://lingsenyou.com/#person" }
+  "publisher": { "@id": "https://lingsenyou.com/#person" },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": { "@type": "EntryPoint", "urlTemplate": "https://lingsenyou.com/panvascular/?q={search_term_string}" },
+    "query-input": "required name=search_term_string"
+  }
 }
 </script>
 <script type="application/ld+json">
@@ -38,7 +54,7 @@
   "@type": "Person",
   "@id": "https://lingsenyou.com/#person",
   "name": "Lingsen You",
-  "alternateName": ["Lingsen Lucas You", "\u6e38\u51cc\u68ee"],
+  "alternateName": ["Lingsen Lucas You", "游凌森"],
   "url": "https://lingsenyou.com/",
   "mainEntityOfPage": "https://lingsenyou.com/",
   "identifier": [{ "@type": "PropertyValue", "propertyID": "ORCID", "value": "0000-0003-0794-5907" }],
@@ -48,903 +64,1128 @@
 <style>
   *,*::before,*::after{box-sizing:border-box}
   /* Daylight is the default, so arriving from the CV site feels continuous. The system
-     dark preference is deliberately not followed; the header control switches manually.
-     Vivid tokens are for painted surfaces only, readable tokens carry text. */
+     dark preference is deliberately not followed; the header control switches manually. */
   :root{
     --ground:#f2f7fb;
     --surface:#ffffff;
     --surface-2:#eaf3f9;
     --ink:#0a1a26;
-    --ink-soft:#456070;
-    --ink-faint:#6f8ea3;
+    --ink-soft:#3d5a6c;
+    --ink-faint:#577487;
     --line:#dbe9f2;
     --line-strong:#b7d2e2;
     --blue:#0b6fb8;
     --blue-bright:#0a5f9e;
     --blue-wash:#e3f2fc;
     --cyan:#0a6b7d;
-    --cyan-vivid:#06b6d4;
-    --amber:#9a5b00;
+    --amber:#8a5000;
     --amber-wash:#fef2df;
     --green:#0e7a55;
     --green-wash:#e2f7ee;
+    --red:#b3261e;
+    --red-wash:#fdecea;
     --glow:0 1px 2px rgba(10,26,38,.05), 0 14px 30px -20px rgba(11,111,184,.42);
-    --glow-strong:0 2px 6px rgba(10,26,38,.06), 0 20px 40px -20px rgba(6,182,212,.45);
     --radius:10px;
     --mono:ui-monospace,"SF Mono","Cascadia Code","Segoe UI Mono",Consolas,monospace;
     --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   }
-  :root[data-theme="light"]{
-    --ground:#f2f7fb; --surface:#ffffff; --surface-2:#eaf3f9;
-    --ink:#0a1a26; --ink-soft:#456070; --ink-faint:#6f8ea3;
-    --line:#dbe9f2; --line-strong:#b7d2e2;
-    --blue:#0b6fb8; --blue-bright:#0a5f9e; --blue-wash:#e3f2fc;
-    --cyan:#0a6b7d; --cyan-vivid:#06b6d4;
-    --amber:#9a5b00; --amber-wash:#fef2df;
-    --green:#0e7a55; --green-wash:#e2f7ee;
-    --glow:0 1px 2px rgba(10,26,38,.05), 0 14px 30px -20px rgba(11,111,184,.42);
-    --glow-strong:0 2px 6px rgba(10,26,38,.06), 0 20px 40px -20px rgba(6,182,212,.45);
-  }
   :root[data-theme="dark"]{
-    --ground:#050a12; --surface:#0b131d; --surface-2:#0e1826;
-    --ink:#edf5fc; --ink-soft:#9db4cc; --ink-faint:#6a8299;
-    --line:#17263a; --line-strong:#26405c;
-    --blue:#31c8ff; --blue-bright:#5cd8ff; --blue-wash:#0b2436;
-    --cyan:#25f0d4; --cyan-vivid:#25f0d4;
-    --amber:#ffbe4d; --amber-wash:#2a1f08;
-    --green:#3ce6a4; --green-wash:#06231a;
-    --glow:0 0 24px rgba(49,200,255,.20);
-    --glow-strong:0 0 34px rgba(37,240,212,.28);
+    --ground:#06121b;
+    --surface:#0c1e2a;
+    --surface-2:#122939;
+    --ink:#e8f4fa;
+    --ink-soft:#a8c6d6;
+    --ink-faint:#8fb0c2;
+    --line:#1b3a4d;
+    --line-strong:#27526b;
+    --blue:#5cc0f5;
+    --blue-bright:#8ad4ff;
+    --blue-wash:#10314a;
+    --cyan:#5fd9e8;
+    --amber:#ffc46b;
+    --amber-wash:#3a2a10;
+    --green:#5fd6a6;
+    --green-wash:#0f3a2c;
+    --red:#ff9b92;
+    --red-wash:#3d1b18;
+    --glow:0 1px 2px rgba(0,0,0,.4), 0 18px 34px -24px rgba(0,0,0,.8);
   }
-
+  html{-webkit-text-size-adjust:100%}
   body{
     margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
-    line-height:1.6;-webkit-font-smoothing:antialiased;position:relative;
+    font-size:16px;line-height:1.55;
   }
-  /* blueprint grid with two soft daylight sources behind the masthead */
-  body::before{
-    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-    background-image:
-      radial-gradient(940px 460px at 78% -8%, rgba(6,182,212,.20), transparent 64%),
-      radial-gradient(800px 400px at 10% 0%, rgba(11,111,184,.14), transparent 62%),
-      linear-gradient(rgba(11,111,184,.055) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(11,111,184,.055) 1px, transparent 1px);
-    background-size:auto, auto, 46px 46px, 46px 46px;
-    mask-image:linear-gradient(#000 0 46%, transparent 74%);
+  a{color:var(--blue);text-underline-offset:2px}
+  a:hover{color:var(--blue-bright)}
+  :focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:4px}
+  .wrap{width:min(1080px,calc(100% - 32px));margin-inline:auto}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+  header{border-bottom:1px solid var(--line);background:var(--surface);position:sticky;top:0;z-index:20}
+  .hrow{display:flex;align-items:center;gap:12px;justify-content:space-between;padding:10px 0}
+  .brand{display:flex;align-items:baseline;gap:9px;min-width:0}
+  .brand b{font-size:1rem;letter-spacing:-.01em}
+  .brand small{font-family:var(--mono);font-size:.64rem;color:var(--ink-faint);letter-spacing:.08em;text-transform:uppercase}
+  .hlinks{display:flex;align-items:center;gap:8px;flex:none}
+  .chip{
+    font:inherit;font-size:.8rem;line-height:1.2;padding:7px 11px;border-radius:999px;
+    border:1px solid var(--line-strong);background:var(--surface);color:var(--ink-soft);
+    cursor:pointer;white-space:nowrap;
   }
-  :root[data-theme="dark"] body::before{
-    background-image:
-      radial-gradient(900px 420px at 78% -6%, rgba(37,240,212,.10), transparent 62%),
-      radial-gradient(760px 380px at 12% 2%, rgba(49,200,255,.09), transparent 60%),
-      linear-gradient(rgba(49,200,255,.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(49,200,255,.045) 1px, transparent 1px);
-    background-size:auto, auto, 46px 46px, 46px 46px;
+  .chip:hover{border-color:var(--blue);color:var(--blue)}
+  .chip[aria-pressed="true"],.chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  :root[data-theme="dark"] .chip[aria-pressed="true"],:root[data-theme="dark"] .chip.on{color:#04121c}
+
+  .intro{padding:26px 0 8px}
+  h1{margin:0 0 8px;font-size:clamp(1.45rem,3.6vw,2.3rem);line-height:1.15;letter-spacing:-.02em}
+  h1 .hl{color:var(--blue)}
+  .lede{margin:0;color:var(--ink-soft);font-size:.98rem;max-width:64ch}
+  .lede .long{display:inline}
+
+  .searchbox{margin:16px 0 6px}
+  .srow{display:flex;gap:8px}
+  #q{
+    flex:1;min-width:0;font:inherit;padding:12px 14px;border-radius:var(--radius);
+    border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);
   }
-  header,main,footer{position:relative;z-index:1}
-  .wrap{max-width:1080px;margin-inline:auto;padding-inline:clamp(16px,3.5vw,32px)}
-  a{color:var(--blue-bright)}
-  h1,h2,h3{margin:0;line-height:1.2;text-wrap:balance}
-  .num{font-variant-numeric:tabular-nums}
-  :focus-visible{outline:2px solid var(--blue-bright);outline-offset:2px;border-radius:4px}
-
-  /* header */
-  header{border-bottom:1px solid var(--line-strong);background:color-mix(in srgb, var(--surface) 82%, transparent);backdrop-filter:blur(12px) saturate(1.3);position:sticky;top:0;z-index:10}
-  header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
-    background:linear-gradient(90deg,transparent,var(--cyan-vivid),var(--blue),transparent);opacity:.75}
-  .hbar{display:flex;align-items:center;gap:14px;padding-block:14px;flex-wrap:wrap}
-  .logo{display:flex;align-items:center;gap:9px;margin-right:auto}
-  .logo .dish{width:26px;height:26px;flex:none}
-  .logo b{font-size:1.02rem;letter-spacing:-.01em}
-  .logo small{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
-  .chip{font-family:var(--mono);font-size:.68rem;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink-soft);border-radius:999px;padding:5px 10px;cursor:pointer;line-height:1}
-  .chip:hover{border-color:var(--blue-bright);color:var(--ink)}
-  .backlink{font-size:.84rem;color:var(--ink-soft);text-decoration:none}
-  .backlink:hover{color:var(--blue-bright)}
-
-  /* intro */
-  .intro{padding-block:clamp(26px,3.6vw,44px);display:grid;grid-template-columns:1fr 260px;gap:38px;align-items:center}
-  @media (max-width:860px){ .intro{grid-template-columns:1fr;gap:26px} .radarviz{justify-self:center} }
-  .intro h1{font-size:clamp(1.55rem,3.2vw,2.25rem);font-weight:800;letter-spacing:-.024em}
-  .intro h1 .hl{
-    background:linear-gradient(92deg,var(--cyan),var(--blue));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
+  #q::placeholder{color:var(--ink-faint)}
+  .btn{
+    font:inherit;font-weight:650;padding:12px 18px;border-radius:var(--radius);border:1px solid var(--blue);
+    background:var(--blue);color:#fff;cursor:pointer;white-space:nowrap;
   }
-  .intro p{color:var(--ink-soft);margin:11px 0 0;max-width:60ch;font-size:1rem}
-  .provenance{display:inline-flex;align-items:center;gap:7px;margin-top:16px;font-family:var(--mono);font-size:.7rem;letter-spacing:.03em;color:var(--green);background:var(--green-wash);border:1px solid var(--green);border-radius:999px;padding:5px 11px}
-
-  /* radar display */
-  .radarviz{width:230px;height:230px;position:relative;flex:none}
-  .radarviz .ring{position:absolute;inset:0;border-radius:50%;border:1px solid var(--line-strong)}
-  .radarviz .ring.r2{inset:17%} .radarviz .ring.r3{inset:34%} .radarviz .ring.r4{inset:51%}
-  .radarviz .cross,.radarviz .cross2{position:absolute;background:var(--line-strong);opacity:.75}
-  .radarviz .cross{left:50%;top:0;bottom:0;width:1px;transform:translateX(-.5px)}
-  .radarviz .cross2{top:50%;left:0;right:0;height:1px;transform:translateY(-.5px)}
-  .radarviz .face{position:absolute;inset:0;border-radius:50%;
-    background:radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--cyan-vivid) 14%, transparent), transparent 70%);
-    box-shadow:inset 0 0 40px rgba(6,182,212,.14), var(--glow)}
-  .radarviz .sweep{position:absolute;inset:0;border-radius:50%;overflow:hidden}
-  .radarviz .sweep::before{
-    content:"";position:absolute;inset:0;border-radius:50%;
-    background:conic-gradient(from 0deg, transparent 0deg, transparent 300deg,
-      color-mix(in srgb, var(--cyan-vivid) 40%, transparent) 352deg, color-mix(in srgb, var(--cyan-vivid) 72%, transparent) 360deg);
-    animation:sweep 4.2s linear infinite;
+  :root[data-theme="dark"] .btn{color:#04121c}
+  .btn:hover{background:var(--blue-bright);border-color:var(--blue-bright)}
+  .btn.ghost{background:var(--surface);color:var(--blue)}
+  .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .ctl-label{font-family:var(--mono);font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-right:2px}
+  select{
+    font:inherit;font-size:.86rem;padding:7px 10px;border-radius:999px;border:1px solid var(--line-strong);
+    background:var(--surface);color:var(--ink-soft);
   }
-  @keyframes sweep{to{transform:rotate(360deg)}}
-  .radarviz .blip{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--cyan-vivid);
-    box-shadow:0 0 10px var(--cyan-vivid);opacity:0;animation:blip 4.2s linear infinite}
-  @keyframes blip{0%,4%{opacity:0;transform:scale(.5)}8%{opacity:1;transform:scale(1)}46%{opacity:.35}100%{opacity:0}}
-  .radarviz .label{position:absolute;left:50%;bottom:-26px;transform:translateX(-50%);
-    font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);white-space:nowrap}
+  .toggle{display:inline-flex;align-items:center;gap:6px;font-size:.86rem;color:var(--ink-soft);
+    border:1px solid var(--line-strong);border-radius:999px;padding:6px 11px;background:var(--surface);cursor:pointer}
+  .toggle input{margin:0}
+  .phrase{display:none;align-items:center;gap:7px;margin-top:9px;font-size:.8rem;color:var(--ink-soft)}
+  .phrase.show{display:inline-flex}
+  .phrase code{font-family:var(--mono);font-size:.78rem;background:var(--surface-2);padding:2px 6px;border-radius:5px}
+  .phrase button{border:0;background:none;color:var(--ink-faint);cursor:pointer;font:inherit;padding:0 2px}
 
-  /* search */
-  .searchbox{background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--radius);padding:14px;box-shadow:var(--glow);position:relative;overflow:hidden}
-  .searchbox::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
-    background:linear-gradient(90deg,transparent,var(--cyan-vivid),transparent);opacity:.85}
-  .srow{display:flex;gap:9px}
-  .srow input{flex:1;min-width:0;font:inherit;font-size:1rem;color:var(--ink);background:var(--surface-2);border:1px solid var(--line-strong);border-radius:8px;padding:11px 13px}
-  .srow input:focus{outline:none;border-color:var(--blue-bright);background:var(--surface)}
-  .btn{font:inherit;font-weight:700;font-size:.92rem;border:1px solid transparent;border-radius:8px;padding:11px 20px;cursor:pointer;
-    background:linear-gradient(135deg,#0a7d94,#0a5f9e);color:#fff;
-    box-shadow:0 6px 18px -8px rgba(11,111,184,.7);transition:filter .15s ease, box-shadow .15s ease}
-  .btn:hover{filter:brightness(1.1);box-shadow:0 10px 24px -10px rgba(6,182,212,.8)}
-  .btn[disabled]{opacity:.55;cursor:progress;box-shadow:none}
-  :root[data-theme="dark"] .btn{background:linear-gradient(135deg,var(--cyan),var(--blue));color:#031018;box-shadow:0 0 20px rgba(37,240,212,.25)}
-  :root[data-theme="dark"] .btn:hover{box-shadow:0 0 28px rgba(37,240,212,.42)}
-  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px;align-items:center}
-  .filters label{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
-  .filters select{font:inherit;font-size:.84rem;color:var(--ink);background:var(--surface-2);border:1px solid var(--line-strong);border-radius:7px;padding:6px 9px}
-  .oa-toggle{display:inline-flex;align-items:center;gap:6px;font-size:.84rem;color:var(--ink-soft);cursor:pointer}
-  .searchhint{margin:10px 1px 0;color:var(--ink-faint);font-size:.76rem;line-height:1.45}
-  .searchhint strong{color:var(--ink-soft)}
+  .lenses{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+  .lens{font-size:.79rem;padding:6px 11px}
+  .lens .n{font-family:var(--mono);font-size:.7rem;opacity:.8;margin-left:7px;padding-left:7px;border-left:1px solid currentColor}
 
-  /* lenses */
-  .lenses{margin-top:16px}
-  .lenses .lab{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin-bottom:8px}
-  .lenschips{display:flex;flex-wrap:wrap;gap:7px}
-  .lens{font:inherit;font-size:.83rem;background:var(--surface-2);border:1px solid var(--line-strong);color:var(--ink-soft);border-radius:999px;padding:6px 13px;cursor:pointer;transition:all .15s ease}
-  .lens:hover{border-color:var(--cyan-vivid);color:var(--ink);box-shadow:0 4px 12px -6px rgba(6,182,212,.55)}
-  .lens[aria-pressed="true"]{background:var(--blue-wash);border-color:var(--cyan-vivid);color:var(--cyan);font-weight:700;box-shadow:0 5px 14px -6px rgba(6,182,212,.5)}
+  .status{
+    margin:14px 0 0;padding:9px 12px;border:1px solid var(--line);border-left:3px solid var(--blue);
+    border-radius:8px;background:var(--surface);color:var(--ink-soft);font-size:.82rem;
+    display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;
+  }
+  .status.warn{border-left-color:var(--amber);background:var(--amber-wash);color:var(--ink)}
+  .status.err{border-left-color:var(--red);background:var(--red-wash);color:var(--ink)}
+  .status .src{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint)}
+  .status button{font:inherit;font-size:.8rem;background:none;border:0;color:var(--blue);cursor:pointer;padding:0;text-decoration:underline}
 
-  /* concept tracker */
-  .tracker{margin-top:26px;background:linear-gradient(135deg,var(--surface),var(--surface-2));border:1px solid var(--line-strong);border-left:3px solid var(--amber);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--glow)}
-  .tracker h2{font-size:1.05rem;font-weight:800;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-  .tracker h2 em{font-style:normal;font-family:var(--mono);font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber);border-radius:999px;padding:3px 9px}
-  .tracker > p{color:var(--ink-soft);font-size:.9rem;margin:8px 0 0;max-width:74ch}
-  .tstats{display:flex;flex-wrap:wrap;gap:22px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
-  .tstat b{display:block;font-family:var(--mono);font-size:1.6rem;font-weight:700;letter-spacing:-.01em;line-height:1.1;color:var(--cyan)}
-  :root[data-theme="dark"] .tstat b{text-shadow:0 0 22px rgba(37,240,212,.42)}
-  .tstat span{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
+  .resbar{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:22px 0 10px}
+  h2{margin:0;font-size:1.12rem;letter-spacing:-.01em}
+  .count{font-family:var(--mono);font-size:.74rem;color:var(--ink-faint)}
+  .spacer{flex:1}
 
-  /* results */
-  .meta{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:26px 0 12px}
-  .meta h2{font-size:1.02rem;font-weight:800}
-  .meta .count{font-family:var(--mono);font-size:.76rem;color:var(--ink-faint)}
-  .sharesearch{margin-left:auto}
   .list{display:flex;flex-direction:column;gap:10px}
-  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:15px 17px;transition:border-color .15s ease, box-shadow .15s ease;position:relative}
-  .card:hover{border-color:var(--cyan-vivid);box-shadow:0 10px 26px -16px rgba(11,111,184,.45)}
-  .card .t{font-size:1rem;font-weight:700;line-height:1.35;color:var(--ink);text-decoration:none;display:inline-block}
-  .card .t:hover{color:var(--blue-bright);text-decoration:underline}
-  .card .au{font-size:.85rem;color:var(--ink-soft);margin-top:5px}
-  .card .ln{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-top:9px}
-  .tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.02em;border-radius:5px;padding:3px 8px;border:1px solid var(--line-strong);color:var(--ink-soft);white-space:nowrap}
-  .tag.venue{color:var(--blue-bright);border-color:var(--blue-bright);background:var(--blue-wash);font-weight:700;max-width:340px;overflow:hidden;text-overflow:ellipsis}
-  .tag.cite{color:var(--amber);border-color:var(--amber);background:var(--amber-wash);font-weight:700}
-  .tag.cite s{text-decoration:none;font-weight:500;opacity:.72;letter-spacing:.04em}
-  .tag.scholar{color:var(--blue);border-color:var(--line-strong);text-decoration:none;font-weight:600}
-  .tag.scholar:hover{border-color:var(--blue);background:var(--blue-wash)}
-  .tag.oa{color:var(--green);border-color:var(--green);background:var(--green-wash);font-weight:700}
-  .tag.verified{color:var(--green);border-color:var(--green);background:var(--green-wash);font-weight:700}
-  .tag.warn{color:#b5364f;border-color:#c4485c;background:color-mix(in srgb,#c4485c 10%,var(--surface));font-weight:800}
-  .tag.source{color:var(--ink-soft);text-decoration:none}
-  .tag.source:hover{color:var(--blue-bright);border-color:var(--blue-bright)}
-  .card .ab{font-size:.87rem;color:var(--ink-soft);margin-top:9px;display:none}
-  .card .ab.on{display:block}
-  .card .more{font:inherit;font-size:.76rem;font-family:var(--mono);background:none;border:none;color:var(--blue-bright);cursor:pointer;padding:6px 0 0;text-decoration:underline}
-  .doi{font-family:var(--mono);font-size:.7rem;color:var(--ink-faint);word-break:break-all}
-  .card-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:9px}
-  .copycite{font:inherit;font-family:var(--mono);font-size:.7rem;color:var(--blue-bright);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
-  .copycite[data-copied="true"]{color:var(--green)}
+  .card{
+    border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);
+    padding:14px 16px;box-shadow:var(--glow);
+  }
+  .card.sel{border-color:var(--blue)}
+  .chead{display:flex;gap:10px;align-items:flex-start}
+  .pick{margin:3px 0 0;flex:none;width:16px;height:16px;accent-color:var(--blue)}
+  .t-wrap{margin:0;font-size:1rem;font-weight:660;line-height:1.35}
+  .t{color:var(--ink);text-decoration:none}
+  .t:hover{color:var(--blue);text-decoration:underline}
+  .au{margin:5px 0 0;font-size:.85rem;color:var(--ink-soft)}
+  .meta{margin:6px 0 0;font-size:.82rem;color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .meta .v{font-style:italic}
+  .dot{color:var(--ink-faint)}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .tag{
+    font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;padding:3px 7px;border-radius:5px;
+    background:var(--surface-2);color:var(--ink-soft);border:1px solid var(--line);
+  }
+  .tag.new{background:var(--blue-wash);color:var(--blue-bright);border-color:transparent;font-weight:700}
+  .tag.oa{background:var(--green-wash);color:var(--green);border-color:transparent}
+  .tag.cite{background:transparent;border-color:var(--line-strong)}
+  .tag.top{background:var(--amber-wash);color:var(--amber);border-color:transparent}
+  .tag.warn{background:var(--red-wash);color:var(--red);border-color:transparent;font-weight:700}
+  .tag.design{background:var(--blue-wash);color:var(--blue-bright);border-color:transparent}
+  .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:9px;font-size:.8rem}
+  .links a,.links button{font:inherit;font-size:.8rem;background:none;border:0;padding:0;color:var(--blue);cursor:pointer;text-decoration:underline}
+  .ab{
+    margin:9px 0 0;font-size:.87rem;color:var(--ink-soft);line-height:1.5;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .ab.open{display:block;-webkit-line-clamp:none}
+  .ab.none{display:none}
 
-  .state{background:var(--surface);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:26px;text-align:center;color:var(--ink-soft);font-size:.93rem}
-  .state.err{border-color:#c4485c;color:#c4485c}
-  .skel{height:78px;background:linear-gradient(90deg,var(--surface) 25%,var(--surface-2) 50%,var(--surface) 75%);background-size:200% 100%;animation:sh 1.2s infinite;border:1px solid var(--line);border-radius:var(--radius)}
-  @keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
-  .loadmore{margin:14px auto 0;display:block}
+  .loadmore{display:block;margin:16px auto 0}
+  .empty{padding:22px;border:1px dashed var(--line-strong);border-radius:var(--radius);color:var(--ink-soft);background:var(--surface)}
+  .skeleton{height:96px;border-radius:var(--radius);background:linear-gradient(90deg,var(--surface),var(--surface-2),var(--surface));
+    background-size:200% 100%;animation:sk 1.3s ease-in-out infinite}
+  @keyframes sk{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-  footer{margin-top:44px;border-top:1px solid var(--line);padding-block:26px;color:var(--ink-faint);font-size:.82rem;background:var(--surface)}
-  footer p{margin:0 0 8px;max-width:80ch}
-  footer code{font-family:var(--mono);font-size:.76rem;background:var(--surface-2);padding:1px 5px;border-radius:4px}
+  .exportbar{
+    position:sticky;bottom:0;z-index:15;margin-top:14px;display:none;gap:10px;flex-wrap:wrap;align-items:center;
+    padding:10px 14px;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--surface);
+    box-shadow:0 -6px 24px -18px rgba(10,26,38,.5);
+  }
+  .exportbar.show{display:flex}
+  .exportbar b{font-size:.86rem}
 
-  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-  @media (max-width:620px){
-    .srow{flex-direction:column}
-    .tag.venue{max-width:100%}
+  section.panel{margin:34px 0 0;padding:18px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+  .tstats{display:flex;flex-wrap:wrap;gap:18px;margin-top:10px}
+  .tstat b{display:block;font-family:var(--mono);font-size:1.32rem;color:var(--blue)}
+  .tstat span{font-size:.78rem;color:var(--ink-soft)}
+  .asof{font-family:var(--mono);font-size:.68rem;color:var(--ink-faint);margin-top:10px}
+
+  footer{margin:40px 0 60px;color:var(--ink-soft);font-size:.83rem}
+  footer h3{margin:0 0 8px;font-size:.95rem;color:var(--ink)}
+  footer p{margin:0 0 9px;max-width:72ch}
+  code{font-family:var(--mono);font-size:.82em}
+
+  @media (max-width:720px){
+    .brand small{display:none}
+    .intro{padding:14px 0 4px}
+    h1{font-size:1.35rem}
+    .lede{font-size:.92rem}
+    .lede .long{display:none}
+    .searchbox{margin-top:12px}
+    .btn{padding:12px 14px}
+    section.panel{padding:14px}
+    .tstats{gap:12px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="wrap hbar">
-    <div class="logo">
-      <svg class="dish" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M3 20h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-        <path d="M12 20V9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-        <path d="M12 9a7 7 0 0 1 7 7" stroke="var(--blue-bright)" stroke-width="1.7" stroke-linecap="round"/>
-        <path d="M12 13a3 3 0 0 1 3 3" stroke="var(--blue-bright)" stroke-width="1.7" stroke-linecap="round"/>
-        <circle cx="12" cy="6.5" r="2.2" stroke="currentColor" stroke-width="1.7"/>
-      </svg>
-      <div>
-        <b>Panvascular Radar</b>
-        <small>Live literature · Medicine × Engineering</small>
-      </div>
+  <div class="wrap hrow">
+    <div class="brand">
+      <b>Panvascular Radar</b>
+      <small>medicine × engineering</small>
     </div>
-    <a class="backlink" href="https://lingsenyou.com/">&larr; Lingsen You</a>
-    <button class="chip" id="themeBtn" type="button" aria-label="Switch colour theme">◐</button>
+    <div class="hlinks">
+      <a class="chip" href="https://lingsenyou.com/">Profile</a>
+      <button class="chip" id="themeBtn" type="button" aria-pressed="false">Dark</button>
+    </div>
   </div>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="main">
+  <div class="intro">
+    <h1>What is <span class="hl">new</span> at the panvascular device frontier.</h1>
+    <p class="lede">Eight standing questions, searched live in PubMed, with citation counts from OpenAlex.
+      <span class="long">Every record links to its DOI, nothing is summarised by a machine, and anything you select can be exported to your reference manager.</span></p>
+  </div>
 
-  <section class="intro">
-    <div class="intro-text">
-      <h1>Literature at the panvascular device frontier, <span class="hl">queried live</span>.</h1>
-      <p>
-        A focused reading instrument for the intersection of interventional cardiology and engineering:
-        intravascular imaging, bioresorbable scaffolds, flexible electronics, digital twins and AI in
-        coronary imaging. Records are discovered live, restricted to DOI-bearing works, and checked against
-        Crossref so their identity and source metadata can be audited.
-      </p>
-      <span class="provenance">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Live discovery · DOI linked · Crossref checked · no generated summaries
-      </span>
-    </div>
-
-    <div class="radarviz" aria-hidden="true">
-      <div class="face"></div>
-      <div class="ring"></div><div class="ring r2"></div><div class="ring r3"></div><div class="ring r4"></div>
-      <div class="cross"></div><div class="cross2"></div>
-      <div class="sweep"></div>
-      <div class="blip" style="left:63%;top:31%;animation-delay:.5s"></div>
-      <div class="blip" style="left:34%;top:57%;animation-delay:1.6s"></div>
-      <div class="blip" style="left:72%;top:66%;animation-delay:2.5s"></div>
-      <div class="blip" style="left:46%;top:22%;animation-delay:3.4s"></div>
-      <div class="label">Scanning the field</div>
-    </div>
-  </section>
-
-  <section class="searchbox">
-    <form class="srow" id="searchForm">
-      <input id="q" type="search" autocomplete="off" required maxlength="500" placeholder='Search titles and abstracts. Quote a phrase for precision, e.g. "stent malapposition" AND "optical coherence tomography"' aria-label="Search query">
+  <section class="searchbox" aria-label="Search">
+    <form class="srow" id="searchForm" role="search" action="" method="get">
+      <label class="sr-only" for="q">Search titles and abstracts</label>
+      <input id="q" name="q" type="search" autocomplete="off" maxlength="300"
+             placeholder="Search titles and abstracts, e.g. calcified nodule, sirolimus balloon">
       <button class="btn" id="goBtn" type="submit">Search</button>
     </form>
-    <div class="filters">
-      <label for="sort">Sort</label>
-      <select id="sort">
-        <option value="relevance">Relevance</option>
-        <option value="page_citations">Citations within relevant results</option>
-        <option value="publication_date:desc">Newest</option>
-      </select>
-      <label for="since">Since</label>
-      <select id="since">
-        <option value="">Any year</option>
-        <option value="2024-01-01">2024</option>
-        <option value="2022-01-01">2022</option>
-        <option value="2020-01-01">2020</option>
-      </select>
-      <label class="oa-toggle" for="oaOnly"><input type="checkbox" id="oaOnly"> Open access only</label>
-    </div>
-    <div class="searchhint">
-      <strong>Transparent ranking:</strong> relevance is supplied by OpenAlex. The citation option reorders each
-      relevance-ranked page rather than pulling weakly related, highly cited records to the top. DOI registration
-      verifies a record's identity, not its evidence quality. Every result must match its indexed title or abstract.
-    </div>
-    <div class="lenses">
-      <div class="lab">Curated lenses</div>
-      <div class="lenschips" id="lenses"></div>
-    </div>
-  </section>
 
-  <section class="tracker" id="tracker">
-    <h2>Concept tracker: Suitcordance <em>live count</em></h2>
-    <p>
-      Suitcordance describes the match between an interventional device and its vascular environment,
-      combining short-term mechanical suitability with long-term biological concordance. This panel runs
-      a live query for the term so its uptake in the indexed literature can be seen, and audited, directly.
+    <p class="phrase" id="phraseNote">
+      <span>Searching the exact phrase <code id="phraseText"></code></span>
+      <button type="button" id="phraseOff" title="Search the words separately">use loose words ×</button>
     </p>
-    <div class="tstats" id="tstats">
-      <div class="tstat"><b class="num" id="tCount">&mdash;</b><span>records with the term</span></div>
-      <div class="tstat"><b class="num" id="tCites">&mdash;</b><span>citations &middot; OpenAlex</span></div>
-      <div class="tstat"><b class="num" id="tFirst">&mdash;</b><span>earliest record</span></div>
-      <div class="tstat"><b class="num" id="tOA">&mdash;</b><span>open access</span></div>
+
+    <div class="controls">
+      <span class="ctl-label">Window</span>
+      <button class="chip scope" type="button" data-scope="60" aria-pressed="true">New · 60 days</button>
+      <button class="chip scope" type="button" data-scope="year" aria-pressed="false">This year</button>
+      <button class="chip scope" type="button" data-scope="all" aria-pressed="false">All time</button>
+      <span class="ctl-label" style="margin-left:6px">Order</span>
+      <label class="sr-only" for="sort">Order results</label>
+      <select id="sort">
+        <option value="date">Newest first</option>
+        <option value="relevance">Best match</option>
+        <option value="cited">Most cited (loaded)</option>
+      </select>
+      <label class="toggle" for="oaOnly"><input type="checkbox" id="oaOnly"> Open access only</label>
+      <button class="chip" type="button" id="savedBtn" aria-pressed="false">Saved <span id="savedN" class="n">0</span></button>
     </div>
+
+    <div class="lenses" id="lenses" role="group" aria-label="Standing questions"></div>
   </section>
 
-  <div class="meta">
-    <h2 id="resultsTitle">Results</h2>
-    <span class="count" id="resultsCount" aria-live="polite"></span>
-    <button class="chip sharesearch" id="shareSearch" type="button">Copy search link</button>
-  </div>
-  <div class="list" id="list"></div>
-  <button class="btn loadmore" id="loadMore" type="button" style="display:none">Load more</button>
+  <p class="status" id="status" aria-live="polite"><span class="src" id="statusSrc">Snapshot</span> <span id="statusText">Loading…</span></p>
 
+  <div class="resbar">
+    <h2 id="resultsTitle">New at the frontier</h2>
+    <span class="count" id="resultsCount"></span>
+    <span class="spacer"></span>
+    <button class="chip" id="shareSearch" type="button">Copy link</button>
+  </div>
+
+  <div class="list" id="list" role="region" aria-label="Results" aria-busy="false"></div>
+  <p class="sr-only" id="announcer" role="status" aria-live="polite"></p>
+  <button class="btn ghost loadmore" id="loadMore" type="button" style="display:none">Load 25 more</button>
+
+  <div class="exportbar" id="exportbar">
+    <b><span id="selN">0</span> selected</b>
+    <button class="chip" type="button" data-export="ris">RIS</button>
+    <button class="chip" type="button" data-export="bib">BibTeX</button>
+    <button class="chip" type="button" data-export="csv">CSV</button>
+    <button class="chip" type="button" data-export="cite">Copy citations</button>
+    <button class="chip" type="button" data-export="save">Save to list</button>
+    <button class="chip" type="button" data-export="clear">Clear</button>
+  </div>
+
+  <section class="panel" id="tracker">
+    <h2>Concept tracker · <em>suitcordance</em></h2>
+    <p style="margin:6px 0 0;color:var(--ink-soft);font-size:.9rem">
+      A coinage from this group for how well an implanted device fits the vessel it is put into. The counter is here so
+      the term can be checked rather than believed.
+    </p>
+    <div class="tstats" id="tstats"></div>
+    <p class="asof" id="trackerAsOf"></p>
+  </section>
+
+  <footer class="wrap" style="width:auto">
+    <h3>How this page works</h3>
+    <p>Search runs against the <a href="https://www.ncbi.nlm.nih.gov/home/develop/api/" target="_blank" rel="noopener">PubMed E-utilities</a>,
+      which are free, keyless and have no daily budget, so the radar keeps working however many people use it.
+      Citation counts, open-access status, field-weighted citation impact and retraction flags come from
+      <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a>, one free single-record lookup per paper.
+      When OpenAlex is unreachable the cards simply show no citation figure rather than a guess.</p>
+    <p>The first screen is a snapshot baked into this page, so it reads instantly and still works offline or when an API is down.
+      Its date is always stated. Nothing on this page is written or ranked by a language model, and no summary is generated:
+      every abstract is the author's own, as deposited in PubMed.</p>
+    <p>Built by <a href="https://lingsenyou.com/">Lingsen You</a>, Zhongshan Hospital, Fudan University.
+      Queries: <code>eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi</code> and <code>api.openalex.org/works/doi:…</code>.
+      Nothing you do here is sent anywhere else; saved papers and your theme live in this browser only.</p>
+  </footer>
 </main>
 
-<footer>
-  <div class="wrap">
-    <p>
-      <strong>Where the data comes from.</strong> Records are queried live from the
-      <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> API, an open index of
-      scholarly works released under CC0. Only DOI-bearing records are shown. Crossref is then used to verify
-      the DOI and, where available, correct the title, byline, journal and publication year. This page stores
-      no corpus of its own and produces no machine-written summaries. A DOI missing from Crossref may belong
-      to another registration agency, so the page reports that status instead of silently treating it as verified.
+<noscript>
+  <div class="wrap" style="padding:20px 0">
+    <p style="padding:14px;border:1px solid #b7d2e2;border-radius:10px;background:#fff">
+      This radar needs JavaScript to query PubMed live. Without it, these are the eight standing questions,
+      each linking to the same search on PubMed:
     </p>
-    <p>
-      <strong>On citation counts.</strong> Indexes genuinely disagree, so each figure carries the name of
-      the index that produced it. Where a DOI is present the
-      <a href="https://www.crossref.org" target="_blank" rel="noopener">Crossref</a> cited-by tally is
-       fetched as well. Either index may be higher because their coverage and update schedules differ.
-       Google Scholar is never collected automatically; the Scholar link simply hands the title to its public
-       search so readers can inspect that source themselves.
-    </p>
-    <p>
-      Built and maintained by <a href="https://lingsenyou.com/">Lingsen You</a>, Zhongshan Hospital,
-      Fudan University. Query endpoint: <code>api.openalex.org/works</code>. This static public version uses
-      OpenAlex's no-key allowance, so temporary rate limiting is possible during heavy use.
-    </p>
+    <ul>
+      <li><a href="https://pubmed.ncbi.nlm.nih.gov/?term=suitcordance&amp;sort=date">Suitcordance</a></li>
+      <li><a href="https://pubmed.ncbi.nlm.nih.gov/?term=%22intravascular+imaging%22+OR+%22intravascular+ultrasound%22+OR+%22intracoronary+imaging%22&amp;sort=date">Intravascular imaging</a></li>
+      <li><a href="https://pubmed.ncbi.nlm.nih.gov/?term=%22bioresorbable+vascular+scaffold%22+OR+%22bioresorbable+stent%22&amp;sort=date">Bioresorbable scaffolds</a></li>
+      <li><a href="https://pubmed.ncbi.nlm.nih.gov/?term=%22drug-coated+balloon%22+OR+%22drug-eluting+balloon%22&amp;sort=date">Drug-coated balloons</a></li>
+      <li><a href="https://pubmed.ncbi.nlm.nih.gov/?term=%22flexible+electronics%22+AND+cardiovascular&amp;sort=date">Flexible electronics</a></li>
+      <li><a href="https://pubmed.ncbi.nlm.nih.gov/?term=%22cardiac+digital+twin%22+OR+%22cardiovascular+digital+twin%22&amp;sort=date">Digital twins</a></li>
+      <li><a href="https://pubmed.ncbi.nlm.nih.gov/?term=%22deep+learning%22+AND+%22coronary+angiography%22&amp;sort=date">AI in coronary imaging</a></li>
+      <li><a href="https://pubmed.ncbi.nlm.nih.gov/?term=%22vessel-on-a-chip%22+OR+%22vasculature-on-a-chip%22&amp;sort=date">Vessel-on-a-chip</a></li>
+    </ul>
   </div>
-</footer>
+</noscript>
+
+<script type="application/json" id="snapshot">{"generated":"2026-09-18","since":"2026-07-20","days":60,"counts":{"suitcordance":{"label":"Suitcordance","total":4,"recent":1},"ivi":{"label":"Intravascular imaging","total":12421,"recent":278},"brs":{"label":"Bioresorbable scaffolds","total":939,"recent":5},"dcb":{"label":"Drug-coated balloons","total":3057,"recent":153},"flex":{"label":"Flexible electronics","total":73,"recent":2},"dt":{"label":"Digital twins","total":27,"recent":2},"ai":{"label":"AI in coronary imaging","total":687,"recent":38},"chip":{"label":"Vessel-on-a-chip","total":112,"recent":3}},"tracker":{"count":4,"cites":19,"first":2025,"oa":4,"of":4},"feed":[{"id":"W7117672782","doi":"10.1080/15476278.2025.2610591","pmid":"41474393","t":"A novel tissue-engineered stent graft combining decellularized scaffold and bioresorbable stent: a pilot feasibility study in a porcine model","v":"Organogenesis","d":"2026-12-31","au":["Shimogawara T","Matsubara K","Tajima K","7"],"ab":"Endovascular aneurysm repair (EVAR) is a widely accepted treatment for aortic pathologies owing to its minimally invasive nature. However, long-term complications, such as stent graft migration and infection, remain unresolved, primarily due to the persistent presence of synthetic materials and limited tissue integration. This pilot study evaluated the feasibility of a novel tissue-engineered stent graft (TESG) combining a bioresorbable poly-L-lactic acid (PLLA) stent with decellularized porcine veins. The veins were processed using a sodium dodecyl sulfate and the Triton X-100 decellularization protocol. Histological and ultrastructural analyses confirmed effective cell removal while preser","c":0,"oa":true,"pdf":"https://www.tandfonline.com/doi/pdf/10.1080/15476278.2025.2610591?needAccess=true","fwci":0.0,"top10":false,"r":false,"ty":"article","pt":[],"lens":"brs"},{"id":"W7165784971","doi":"10.1111/iej.70198","pmid":"42339579","t":"The Interplay of M1 Macrophages and Dental Pulp Stem Cells Promotes Angiogenesis Through IL-8-Dependent VEGF Regulation: An In Vitro Study","v":"Int Endod J","d":"2026-10-01","au":["Thalakiriyawa DS","Koohi-Moghadam M","Hu M","6"],"ab":"Dental pulp inflammation triggers immune responses involving macrophages and dental pulp stem cells (DPSCs), which interact to regulate angiogenesis essential for tissue repair. M1 pro-inflammatory macrophages predominate early in pulpitis, and clarifying their angiogenic role is vital in identifying inflammatory regenerative mechanisms. THP-1 cells and peripheral blood monocyte (PBM)-derived macrophages were polarized to M1 or M2 phenotypes, characterized by qRT-PCR, ELISA, and angiogenesis arrays. A vasculature-on-a-chip comprising DPSCs, human umbilical vein endothelial cells (HUVECs) and THP-1-derived macrophages was imaged, and the vascular segments/sprouts were quantified using ImageJ.","c":1,"oa":true,"pdf":"","fwci":7.5685,"top10":true,"r":false,"ty":"article","pt":[],"lens":"chip"},{"id":"","doi":"10.1016/j.ahj.2026.107609","pmid":"42754134","t":"Temporal trends and clinical characteristics of drug-coated balloon angioplasty for de novo coronary lesions: a six-year analysis from the ORPKI Registry","v":"Am Heart J","d":"2026-09-17","au":["Rakowski T","Glądys K","Siudak Z","10"],"ab":"Drug-coated balloons (DCBs) are established for in-stent restenosis, whereas their role in de novo coronary lesions continues to evolve. Large-scale data on real-world adoption for native lesions remain limited. We analyzed the nationwide National Registry of Invasive Cardiology Procedures (ORPKI), including all percutaneous coronary interventions (PCI) performed in Poland between January 2020 and December 2025. Procedures for in-stent restenosis, chronic total occlusion, and plain balloon angioplasty without drug coating were excluded. The final cohort comprised 504,501 PCI procedures for de novo native coronary lesions, classified as DCB-only, stent-only, or hybrid (DCB plus stent). Tempor","c":null,"oa":false,"pdf":"","fwci":null,"top10":false,"r":false,"ty":"article","pt":[],"lens":"ivi"},{"id":"W7213504712","doi":"10.1016/j.jacadv.2026.103237","pmid":"42753331","t":"Intravascular Imaging-Guided Percutaneous Coronary Intervention for Calcified Coronary Lesions: A Network Meta-Analysis","v":"JACC Adv","d":"2026-09-17","au":["Panuccio G","Abdelwahed YS","Tartaglione G","14"],"ab":"The role of intravascular imaging guidance in percutaneous coronary intervention (PCI) of calcified coronary lesions remains incompletely defined. The objective of the study was to compare intravascular ultrasound (IVUS) or optical coherence tomography (OCT) vs angiography-guided PCI in patients with calcified coronary lesions. A systematic review and frequentist network meta-analysis was conducted. Randomized and observational studies comparing IVUS-, OCT-, and angiography-guided PCI in calcified lesions were included. The primary endpoint was major adverse cardiovascular events (MACE), defined as cardiac death, target vessel myocardial infarction, and target vessel revascularization (TVR).","c":0,"oa":true,"pdf":"","fwci":0.0,"top10":true,"r":false,"ty":"article","pt":[],"lens":"ivi"},{"id":"W7213502806","doi":"10.1016/j.jaccas.2026.110341","pmid":"42752076","t":"Acute Coronary Obstruction During Transcatheter Aortic Valve Implantation Caused by Suspected Calcified Amorphous Tumor Embolization","v":"JACC Case Rep","d":"2026-09-17","au":["Suzuyama H","Konami Y","Horio E","8"],"ab":"Coronary obstruction during transcatheter aortic valve replacement (TAVR) is a rare but catastrophic complication. Embolization from mitral valve structures, including cardiac calcified amorphous tumors, has been rarely reported. A 96-year-old woman with severe aortic stenosis underwent transfemoral TAVR with a self-expanding Evolut FX valve (Medtronic Inc). Intracardiac echocardiography identified a mobile calcified lesion attached to the posterior mitral leaflet that disappeared during valve deployment. Shortly after implantation, cardiogenic shock developed because of acute left main coronary obstruction. Emergent extracorporeal membrane oxygenation and a bailout percutaneous coronary int","c":0,"oa":true,"pdf":"","fwci":0.0,"top10":false,"r":false,"ty":"article","pt":["Case Reports"],"lens":"ivi"},{"id":"W7213456671","doi":"10.1002/ccd.70890","pmid":"42751998","t":"Guidewire Manipulation-Directed IVUS-Guided Antegrade Dissection and Re-Entry Without Dedicated Devices","v":"Catheter Cardiovasc Interv","d":"2026-09-17","au":["Gorgulu S","Akkus O","Sural S"],"ab":"Intravascular ultrasound (IVUS)-guided antegrade dissection and re-entry (ADR) is an emerging strategy for chronic total occlusion (CTO) percutaneous coronary intervention (PCI). However, its adoption has been limited by the perceived requirement for dedicated IVUS systems and specialized puncture guidewires. We describe a guidewire manipulation-directed IVUS-guided ADR technique using widely available equipment. A patient with a complex left anterior descending artery CTO underwent guidewire manipulation-directed IVUS-guided ADR using a conventional long-tip Insight LifeTech IVUS catheter and a handmade 45&#xb0;-shaped 12-g polymer-jacketed guidewire. Following lesion preparation, true-lume","c":0,"oa":false,"pdf":"","fwci":0.0,"top10":true,"r":false,"ty":"article","pt":["Case Reports"],"lens":"ivi"},{"id":"W7213441156","doi":"10.1016/j.avsg.2026.09.006","pmid":"42754218","t":"Outcomes After Endovascular Reinterventions for Femoropopliteal Occlusive Disease","v":"Ann Vasc Surg","d":"2026-09-17","au":["Vaddavalli VV","Cifuentes S","Mendes BC","11"],"ab":"Endovascular therapy for peripheral arterial disease is associated with high reintervention rates. Aim of this study was to report primary patency, conversion to open surgical bypass and freedom from major amputations after endovascular reintervention for femoropopliteal occlusive disease after index endovascular procedure. Retrospective analysis of endovascular procedures at a single institution for femoropopliteal occlusive disease from 2015 to 2022. Subgroup analysis of the endpoints was performed based on drug elution strategy vs no drug elution strategy, and stenting vs stent sparing approach during reintervention. 621 patients underwent index endovascular procedures with a reinterventi","c":0,"oa":false,"pdf":"","fwci":0.0,"top10":true,"r":false,"ty":"article","pt":[],"lens":"dcb"},{"id":"W7213448923","doi":"10.1161/CIRCINTERVENTIONS.126.016978","pmid":"42751771","t":"Influence of Chronic Kidney Disease on Outcomes After Paclitaxel-Coated Balloon Angioplasty for Coronary In-Stent Restenosis","v":"Circ Cardiovasc Interv","d":"2026-09-17","au":["Tehrani BN","Vavilin I","Shlofmitz R","18"],"ab":"Drug-coated balloons (DCB) are superior to conventional balloon angioplasty in coronary in-stent restenosis. The influence of chronic kidney disease (CKD) on outcomes after DCB for in-stent restenosis is not well described. A post hoc analysis of the AGENT IDE trial was performed to compare the efficacy and safety of DCB versus balloon angioplasty in patients with CKD (estimated glomerular filtration rate &lt;60 mL/min per 1.73 m2) and those without renal impairment. The primary outcome was target lesion failure, a composite of ischemia-driven target lesion revascularization (TLR), target vessel myocardial infarction, or cardiac death. The 2 cohorts were compared using time-to-first-event an","c":0,"oa":true,"pdf":"","fwci":0.0,"top10":true,"r":false,"ty":"article","pt":[],"lens":"dcb"},{"id":"W7213529629","doi":"10.1055/a-2927-7553","pmid":"42753805","t":"Artificial Intelligence-Driven Norepinephrine Control Using Adaptive Cardiac Digital Twin for Critical Care Patients","v":"Methods Inf Med","d":"2026-09-17","au":["Nair VS","Niranga GDH","Madathil T","4"],"ab":"Infusion pumps are used in critical care settings to deliver medicines such as norepinephrine (NE), insulin, and certain nutrients. Currently, clinicians preset the infusion rate in the device, usually for 1&#x2009;hour, resulting in a constant drug delivery. However, a patient's response to a preset infusion can vary over time depending on their vital changes. In the case of NE, dosage errors are reported due to delayed infusion and interpatient variability in hemodynamics. To automate the infusion process, fuzzy logic, and proportional integral derivative controllers have been used, but they have fixed algorithms and lack clinical validation. This study proposes a data-driven artificial in","c":0,"oa":true,"pdf":"","fwci":0.0,"top10":false,"r":false,"ty":"article","pt":[],"lens":"dt"},{"id":"W7213460541","doi":"10.1007/s10554-026-03798-3","pmid":"42753113","t":"A deep learning-based algorithm for detecting significant in-stent restenosis in coronary CT angiography","v":"Int J Cardiovasc Imaging","d":"2026-09-17","au":["Park D","Lee YS","Jeong B","6"],"ab":"Coronary CT angiography (CCTA) is widely used for monitoring patients after stent implantation, but beam-hardening and blooming artifacts make assessment of in-stent restenosis (ISR) challenging. This study developed and evaluated a deep learning algorithm for automated detection of significant ISR in CCTA images. A retrospective analysis of 257 patients with 408 stents was conducted, divided into a development set (n&#x2009;=&#x2009;126 patients, 186 stents) and an internal validation set (n&#x2009;=&#x2009;131 patients, 222 stents), with invasive coronary angiography serving as the reference standard. The algorithm's diagnostic performance was compared to two expert radiologists using stan","c":0,"oa":true,"pdf":"","fwci":0.0,"top10":false,"r":false,"ty":"article","pt":[],"lens":"ai"},{"id":"W7213286365","doi":"10.1007/s10554-026-03820-8","pmid":"42747771","t":"Accuracy of CT-derived interarterial and intramural anomalous coronary arteries anatomy compared with 3D-reconstructed IVUS in-vivo reference","v":"Int J Cardiovasc Imaging","d":"2026-09-16","au":["Stark AW","Mokhtari A","Kakizaki R","11"],"ab":"In anomalous aortic origin of a coronary artery (AAOCA), coronary CT angiography (CCTA) is the primary tool for anatomical assessment. However, CCTA measurements lack validation against a high-resolution in-vivo standard. To assess CCTA reliability for lumen dimensions and intramural length (IML) in AAOCA, and to validate these against a three-dimensionally reconstructed intravascular ultrasound (3D-IVUS) reference using three additional IML methodologies. A total of 60 AAOCA patients with an interarterial/intramural course underwent both CCTA and IVUS. A 3D-IVUS was constructed and its geometric reproducibility assessed. CCTA reliability and agreement with 3D-IVUS were evaluated for ostial ","c":0,"oa":true,"pdf":"https://link.springer.com/content/pdf/10.1007/s10554-026-03820-8.pdf","fwci":0.0,"top10":false,"r":false,"ty":"article","pt":[],"lens":"ivi"},{"id":"W7213244932","doi":"10.1016/j.jacasi.2026.08.012","pmid":"42747363","t":"The Thrombus We Leave Behind: Residual Risk After Aspiration Thrombectomy in STEMI","v":"JACC Asia","d":"2026-09-16","au":["Ghazzal B","Ghazzal Z"],"ab":"","c":0,"oa":true,"pdf":"","fwci":0.0,"top10":false,"r":false,"ty":"article","pt":["Editorial"],"lens":"ivi"},{"id":"W7213229805","doi":"10.1007/s00345-026-06781-8","pmid":"42747550","t":"The safety and efficacy of drug-coated balloon dilation system (Keeway) for benign prostate hyperplasia: a preclinical study","v":"World J Urol","d":"2026-09-16","au":["Wang J","Li T","Mao Y","4"],"ab":"In recent years, minimally invasive procedures for benign prostatic hyperplasia (BPH) and urethral strictures have attracted great attention. There is an urgent need for studies investigating the safety and efficacy of the drug-coated balloon (DCB) dilation system (Keeway) for BPH. The balloon was coated with paclitaxel (PTX). 21 male Labrador dogs were lastly randomized into the single-dose group (n&#x2009;=&#x2009;12), double-dose group (n&#x2009;=&#x2009;3), sham procedure group (n&#x2009;=&#x2009;3), and blank control group (n&#x2009;=&#x2009;3). The study period was 90 days. Blood and urine samples were collected before the procedure, and blood, urine, target tissues (prostate and bladd","c":0,"oa":false,"pdf":"","fwci":0.0,"top10":true,"r":false,"ty":"article","pt":[],"lens":"dcb"},{"id":"W7213251529","doi":"10.1002/ccd.70895","pmid":"42745693","t":"Impact of Circumferential Calcification and Acquired Minimum Lumen Area on 1-Year Primary Patency After Drug-Coated Balloon Angioplasty for Femoropopliteal Lesions","v":"Catheter Cardiovasc Interv","d":"2026-09-16","au":["Kobata S","Sugihara M","Fujita T","18"],"ab":"Severe calcification predicts restenosis after drug-coated balloon (DCB) angioplasty for femoropopliteal lesions, but whether an adequate post-procedural minimum lumen area (MLA) can attenuate this effect, and how intravascular ultrasound (IVUS) circumferential calcification compares with angiographic Peripheral Arterial Calcium Scoring System (PACSS), remain unclear. In this exploratory sub-analysis of the multicenter REAL-LEAD registry, we studied 224 femoropopliteal lesions (222 analyzable) treated with a DCB-only strategy under IVUS guidance across 14 Japanese institutions, classified by IVUS calcification angle (&#x2265;&#x2009;180&#xb0; vs. &lt;&#x2009;180&#xb0;) and PACSS grade (3-4 v","c":0,"oa":false,"pdf":"","fwci":0.0,"top10":true,"r":false,"ty":"article","pt":[],"lens":"dcb"},{"id":"W7213317226","doi":"10.1097/CRD.0000000000001466","pmid":"42745307","t":"Post-Procedural Angiography-Based Physiological Indices and Clinical Outcomes After Drug-Coated Balloon Treatment of In-Stent Restenosis: A Systematic Review and Meta-Analysis","v":"Cardiol Rev","d":"2026-09-16","au":["Mudasir M","Rehman A","Kumar P","7"],"ab":"Drug-coated balloons (DCBs) represent an accepted approach for in-stent restenosis (ISR); however, post-procedural predictors for risk stratification remain limited. Angiography-based physiological parameters, including quantitative flow ratio (QFR), microvascular QFR (&#x3bc;QFR), and coronary angiography-derived fractional flow reserve (caFFR), enable noninvasive functional assessment, but their clinical implications after DCB intervention for ISR are not well established. A comprehensive literature search of PubMed, Embase, and the Cochrane Library from inception to May 2026 was conducted to identify studies evaluating post-procedural angiography-based physiological parameters in ISR pati","c":0,"oa":false,"pdf":"","fwci":0.0,"top10":true,"r":false,"ty":"article","pt":[],"lens":"dcb"},{"id":"W7213275718","doi":"10.1097/RCT.0000000000001925","pmid":"42746933","t":"Physical Evaluation of Focal Spot Size and Phantom Thickness in Coronary CT Angiography Using Super-Resolution Deep Learning Reconstruction","v":"J Comput Assist Tomogr","d":"2026-09-16","au":["Ogata S","Tachibana Y","Kanatani R","5"],"ab":"To compare images with small and large focal spot sizes under clinical tube current limits across different subject thicknesses in the heart region using super-resolution deep learning reconstruction (SRDLR) to elucidate image quality behavior. We conducted quantitative assessments to compare small and large focal spot size images. The quantitative assessment involved imaging phantoms with 5 different diameters under coronary computed tomography angiography (CCTA) conditions, followed by SRDLR reconstruction. We calculated the noise power spectrum (NPS) to evaluate the frequency response of image noise in uniform phantom material. Spatial resolution was analyzed by measuring the task-based t","c":0,"oa":false,"pdf":"","fwci":0.0,"top10":false,"r":false,"ty":"article","pt":[],"lens":"ai"},{"id":"W7212864182","doi":"10.1186/s43044-026-00778-9","pmid":"42736444","t":"Stent fracture and embolization: an unusual late complication of neonatal coarctation of aorta stenting with bioresorbable vascular scaffold","v":"Egypt Heart J","d":"2026-09-14","au":["Yousuf Q","Rashid A","Purra S","5"],"ab":"Critical neonatal coarctation of the aorta (CoA) may present with cardiogenic shock and severe ventricular dysfunction, rendering immediate surgical repair high risk. In such situations, transcatheter interventions may be used as a temporary stabilizing strategy. A 10-day-old male neonate with critical CoA presented in cardiogenic shock and severe left ventricular dysfunction. Balloon angioplasty resulted in only transient improvement due to elastic recoil, necessitating rescue implantation of a bioresorbable vascular scaffold. This led to rapid haemodynamic stabilization and recovery of ventricular function. Follow-up computed tomography angiography revealed late scaffold fracture with dist","c":0,"oa":true,"pdf":"https://link.springer.com/content/pdf/10.1186/s43044-026-00778-9.pdf","fwci":0.0,"top10":false,"r":false,"ty":"article","pt":[],"lens":"brs"},{"id":"W7213269140","doi":"10.1016/j.jacc.2026.08.008","pmid":"42747372","t":"Intracoronary Imaging-Guided Percutaneous Coronary Intervention: An Updated Meta-Analysis of Randomized Trials","v":"J Am Coll Cardiol","d":"2026-09-10","au":["Bangalore S","Maqsood MH","Zhang RS","16"],"ab":"Recent societal guidelines provide a Class I recommendation for intracoronary imaging (ICI)-guided percutaneous coronary intervention (PCI) for complex or left main coronary artery disease; however, recent trials have failed to show a benefit. The study aim was to re-evaluate the efficacy of ICI-guided PCI and to explore heterogeneity of results across trials. PubMed, Embase, Cochrane Central, and ClinicalTrials.gov databases were searched through June 3, 2026, for randomized controlled trials (RCTs) comparing outcomes with ICI-guided PCI vs angiography-guided PCI in the drug-eluting stent era. Direct comparison meta-analyses, mixed treatment comparison meta-analyses, trial sequential analys","c":0,"oa":false,"pdf":"","fwci":0.0,"top10":true,"r":false,"ty":"article","pt":[],"lens":"ivi"},{"id":"W7212022720","doi":"10.1016/j.radi.2026.103539","pmid":"42715924","t":"Effects of image reconstruction methods and metal artefact reduction on the analysability and quantification of coronary artery calcium near a pacemaker lead: A phantom study","v":"Radiography (Lond)","d":"2026-09-09","au":["Mochizuki J","Oyama-Manabe N","Kato F","6"],"ab":"Coronary artery calcium (CAC) scoring using non-contrast cardiac CT is widely used for cardiovascular risk stratification. However, metallic devices such as pacemaker leads can produce streak artefacts that hinder reliable CAC assessment. This study evaluated the effects of reconstruction methods and metal artefact reduction (MAR) on CAC quantification adjacent to a pacemaker lead. A cardiac CT calibration phantom containing calcified inserts (200-800 mgHA/cm3; diameters 1-5 mm) was scanned using a 320-detector row CT scanner. A pacemaker lead was placed on the phantom surface to simulate metal artefacts. Images were reconstructed using filtered back projection (FBP), hybrid iterative recons","c":0,"oa":false,"pdf":"","fwci":0.0,"top10":false,"r":false,"ty":"article","pt":[],"lens":"ai"},{"id":"W7208729234","doi":"10.1093/ehjdh/ztag139","pmid":"42712931","t":"Electro-mechanical risk score for coronary artery disease risk estimation using seismocardiography","v":"Eur Heart J Digit Health","d":"2026-09-04","au":["Dehkordi P","Tavakolian K","Rocco T","12"],"ab":"Coronary artery disease (CAD) remains a leading cause of morbidity. Existing clinical likelihood models often lack specificity, contributing to unnecessary diagnostic testing. To develop, train, and validate the electro-mechanical risk (EMR) Score. This machine learning model uses cardiac mechanical information from resting seismocardiography (SCG) recordings and patient-level clinical risk factors to estimate obstructive CAD likelihood. This multi-centre clinical study included 2110 adults. Resting SCG was recorded using a sternum accelerometer. Obstructive CAD was defined as 50% or greater stenosis on coronary computed tomography angiography or invasive coronary angiography. A one-dimensio","c":0,"oa":true,"pdf":"","fwci":0.0,"top10":false,"r":false,"ty":"article","pt":[],"lens":"ai"}]}</script>
 
 <script>
-(function(){
+(function () {
   "use strict";
 
-  var API = "https://api.openalex.org/works";
+  var EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils";
+  var OA = "https://api.openalex.org/works/doi:";
   var MAILTO = "lingsenyou@fudan.edu.cn";
-  var SELECT = [
-    "id","doi","display_name","publication_year","publication_date",
-    "cited_by_count","open_access","primary_location","authorships","type",
-    "abstract_inverted_index","relevance_score","is_retracted","language"
-  ].join(",");
-  var PER_PAGE = 20;
+  var TOOL = "panvascular-radar";
+  var PAGE = 25;
+  var TA = "[Title/Abstract]";
 
-  /* Lens queries combine exact phrases and field terms. OpenAlex searches its indexed
-     scholarly text and supplies the relevance score; the interface does not hand-rank papers. */
+  /* The eight standing questions. The phrases are domain knowledge; only the field tags
+     around them are PubMed syntax. */
   var LENSES = [
-    { key:"suitcordance", label:"Suitcordance",
-      q:'suitcordance' },
-    { key:"ivi",          label:"Intravascular imaging",
-      q:'"intravascular ultrasound" OR "intravascular imaging" OR "intracoronary imaging" OR "intravascular optical coherence tomography"' },
-    { key:"brs",          label:"Bioresorbable scaffolds",
-      q:'"bioresorbable vascular scaffold" OR "bioresorbable coronary scaffold" OR "bioresorbable stent" OR "biodegradable vascular stent"' },
-    { key:"dcb",          label:"Drug-coated balloons",
-      q:'"drug-coated balloon" OR "drug-eluting balloon" OR "paclitaxel-coated balloon" OR "sirolimus-coated balloon"' },
-    { key:"flex",         label:"Flexible electronics",
-      q:'("flexible electronics" OR "stretchable electronics" OR "epicardial electronics" OR "wearable cardiac sensor") AND (cardiac OR cardiovascular OR vascular)' },
-    { key:"dt",           label:"Digital twins",
-      q:'"cardiac digital twin" OR "cardiovascular digital twin" OR "coronary digital twin" OR "hemodynamic digital twin"' },
-    { key:"ai",           label:"AI in coronary imaging",
-      q:'("deep learning" OR "convolutional neural network") AND ("coronary angiography" OR "coronary computed tomography" OR "percutaneous coronary intervention" OR "coronary artery calcium")' },
-    { key:"chip",         label:"Vessel-on-a-chip",
-      q:'"vessel-on-a-chip" OR "vasculature-on-a-chip" OR "vascular organ-on-a-chip" OR "vascularized organ-on-a-chip"' }
+    { key:"suitcordance", label:"Suitcordance", q:"suitcordance" + TA },
+    { key:"ivi", label:"Intravascular imaging",
+      q:'"intravascular ultrasound"' + TA + ' OR "intravascular imaging"' + TA + ' OR "intracoronary imaging"' + TA + ' OR "intravascular optical coherence tomography"' + TA },
+    { key:"brs", label:"Bioresorbable scaffolds",
+      q:'"bioresorbable vascular scaffold"' + TA + ' OR "bioresorbable coronary scaffold"' + TA + ' OR "bioresorbable stent"' + TA + ' OR "biodegradable vascular stent"' + TA },
+    { key:"dcb", label:"Drug-coated balloons",
+      q:'"drug-coated balloon"' + TA + ' OR "drug-eluting balloon"' + TA + ' OR "paclitaxel-coated balloon"' + TA + ' OR "sirolimus-coated balloon"' + TA },
+    { key:"flex", label:"Flexible electronics",
+      q:'("flexible electronics"' + TA + ' OR "stretchable electronics"' + TA + ' OR "epicardial electronics"' + TA + ' OR "wearable cardiac sensor"' + TA + ') AND (cardiac' + TA + ' OR cardiovascular' + TA + ' OR vascular' + TA + ')' },
+    { key:"dt", label:"Digital twins",
+      q:'"cardiac digital twin"' + TA + ' OR "cardiovascular digital twin"' + TA + ' OR "coronary digital twin"' + TA + ' OR "hemodynamic digital twin"' + TA },
+    { key:"ai", label:"AI in coronary imaging",
+      q:'("deep learning"' + TA + ' OR "convolutional neural network"' + TA + ') AND ("coronary angiography"' + TA + ' OR "coronary computed tomography"' + TA + ' OR "percutaneous coronary intervention"' + TA + ' OR "coronary artery calcium"' + TA + ')' },
+    { key:"chip", label:"Vessel-on-a-chip",
+      q:'"vessel-on-a-chip"' + TA + ' OR "vasculature-on-a-chip"' + TA + ' OR "vascular organ-on-a-chip"' + TA + ' OR "vascularized organ-on-a-chip"' + TA }
   ];
 
-  var $ = function(id){ return document.getElementById(id); };
+  var STUDY_TAGS = {
+    "Randomized Controlled Trial": "Randomised trial",
+    "Meta-Analysis": "Meta-analysis",
+    "Systematic Review": "Systematic review",
+    "Practice Guideline": "Guideline",
+    "Guideline": "Guideline",
+    "Multicenter Study": "Multicentre",
+    "Observational Study": "Observational",
+    "Review": "Review",
+    "Case Reports": "Case report",
+    "Clinical Trial": "Clinical trial",
+    "Comparative Study": "Comparative",
+    "Editorial": "Editorial",
+    "Comment": "Comment"
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
   var listEl = $("list"), countEl = $("resultsCount"), titleEl = $("resultsTitle");
-  var qEl = $("q"), sortEl = $("sort"), sinceEl = $("since"), oaEl = $("oaOnly");
-  var moreBtn = $("loadMore"), goBtn = $("goBtn"), shareBtn = $("shareSearch");
-  var state = { q:"", page:1, total:0, loading:false, activeLens:null, seen:{} };
-  var requestSeq = 0;
-  var searchController = null;
-  var crossrefController = null;
+  var qEl = $("q"), sortEl = $("sort"), oaEl = $("oaOnly"), moreBtn = $("loadMore");
+  var statusEl = $("status"), statusSrc = $("statusSrc"), statusText = $("statusText");
+  var announcer = $("announcer"), lensesEl = $("lenses"), exportBar = $("exportbar");
 
-  /* theme */
-  var root = document.documentElement;
-  $("themeBtn").addEventListener("click", function(){
-    /* The page always opens in daylight, so an unset attribute means light,
-       whatever the operating system happens to prefer. */
-    var cur = root.getAttribute("data-theme");
-    var dark = cur === "dark";
-    root.setAttribute("data-theme", dark ? "light" : "dark");
-  });
+  var snap = {};
+  try { snap = JSON.parse($("snapshot").textContent || "{}"); } catch (e) { snap = {}; }
 
-  function esc(s){
+  var state = {
+    q: "", lens: null, scope: "60", sort: "date", oaOnly: false,
+    items: [], total: 0, start: 0, loading: false, mode: "snapshot",
+    phrase: null, loosen: false, showingSaved: false
+  };
+  var seq = 0;
+  var controller = null;
+  var selected = Object.create(null);
+  var citeCache = readStore("pv:cites", {});
+
+  /* ---------- small helpers ---------- */
+
+  function esc(s) {
     return String(s == null ? "" : s)
-      .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
-      .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+  /* Escape everything, then restore only the handful of inline tags publishers deposit.
+     No attribute slot is ever reopened, so nothing can carry an event handler. */
+  function rich(s) {
+    return esc(s)
+      .replace(/&lt;(\/?)(i|em|b|strong|sub|sup)&gt;/g, "<$1$2>")
+      .replace(/&lt;br\s*\/?&gt;/g, " ");
+  }
+  function fmtNum(n) {
+    if (n == null || isNaN(n)) return "";
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  function readStore(key, fallback) {
+    try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+    catch (e) { return fallback; }
+  }
+  function writeStore(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
+  }
+  function daysAgo(dateStr) {
+    if (!dateStr) return null;
+    var t = Date.parse(dateStr.replace(/-/g, "/"));
+    if (isNaN(t)) return null;
+    return Math.floor((Date.now() - t) / 86400000);
+  }
+  function relDate(dateStr) {
+    var d = daysAgo(dateStr);
+    if (d == null) return "";
+    if (d < 0) return "ahead of print";
+    if (d === 0) return "today";
+    if (d === 1) return "yesterday";
+    if (d < 30) return d + " days ago";
+    if (d < 75) return "about a month ago";
+    return "";
+  }
+  function niceDate(dateStr) {
+    if (!dateStr) return "";
+    var t = Date.parse(dateStr.replace(/-/g, "/"));
+    if (isNaN(t)) return dateStr;
+    return new Date(t).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+  }
+  function announce(msg) { announcer.textContent = msg; }
+
+  function setStatus(kind, src, text, action) {
+    statusEl.className = "status" + (kind ? " " + kind : "");
+    statusSrc.textContent = src;
+    statusText.textContent = text;
+    var old = statusEl.querySelector("button");
+    if (old) old.remove();
+    if (action) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = action.label;
+      b.addEventListener("click", action.fn);
+      statusEl.appendChild(b);
+    }
   }
 
-  /* Publishers ship real typography inside titles and abstracts: italicised terms and
-     species names, subscripts in formulae, small caps. Everything is escaped first, then
-     only these bare tags are restored, so a tag carrying attributes stays inert text. */
-  var RICH_TAGS = ["i","em","b","strong","sub","sup","scp","u"];
-  function rich(s){
-    var out = esc(s);
-    for (var i = 0; i < RICH_TAGS.length; i++){
-      var t = RICH_TAGS[i];
-      out = out.replace(new RegExp("&lt;" + t + "&gt;", "gi"), "<" + t + ">")
-               .replace(new RegExp("&lt;/" + t + "&gt;", "gi"), "</" + t + ">");
+  /* ---------- PubMed ---------- */
+
+  function dateFilter(scope) {
+    if (scope === "all") return null;
+    var now = new Date();
+    if (scope === "year") return now.getFullYear() + "/01/01";
+    var d = new Date(now.getTime() - (snap.days || 60) * 86400000);
+    return d.getFullYear() + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + ("0" + d.getDate()).slice(-2);
+  }
+
+  function eutilsURL(path, params) {
+    params.tool = TOOL;
+    params.email = MAILTO;
+    var parts = [];
+    for (var k in params) if (params[k] != null && params[k] !== "") {
+      parts.push(encodeURIComponent(k) + "=" + encodeURIComponent(params[k]));
     }
+    return EUTILS + "/" + path + "?" + parts.join("&");
+  }
+
+  function jget(url, signal) {
+    return fetch(url, { signal: signal }).then(function (r) {
+      if (!r.ok) { var e = new Error("HTTP " + r.status); e.status = r.status; throw e; }
+      return r.json();
+    });
+  }
+
+  function searchPubMed(term, opts, signal) {
+    var mindate = dateFilter(opts.scope);
+    var params = {
+      db: "pubmed", retmode: "json", retmax: PAGE, retstart: opts.start || 0,
+      sort: opts.sort === "relevance" || opts.sort === "cited" ? "relevance" : "date",
+      term: term
+    };
+    if (mindate) { params.datetype = "pdat"; params.mindate = mindate; params.maxdate = "3000/12/31"; }
+    return jget(eutilsURL("esearch.fcgi", params), signal).then(function (d) {
+      var res = (d && d.esearchresult) || {};
+      var ids = res.idlist || [];
+      if (!ids.length) return { total: Number(res.count || 0), items: [] };
+      return jget(eutilsURL("esummary.fcgi", { db: "pubmed", retmode: "json", id: ids.join(",") }), signal)
+        .then(function (sum) {
+          var r = (sum && sum.result) || {};
+          var items = (r.uids || []).map(function (u) { return fromPubMed(r[u]); }).filter(Boolean);
+          return { total: Number(res.count || 0), items: items, ids: ids };
+        });
+    });
+  }
+
+  function fetchAbstracts(ids, signal) {
+    if (!ids || !ids.length) return Promise.resolve({});
+    var url = eutilsURL("efetch.fcgi", { db: "pubmed", retmode: "xml", rettype: "abstract", id: ids.join(",") });
+    return fetch(url, { signal: signal }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (xml) {
+      var out = {};
+      if (!xml) return out;
+      var chunks = xml.split("<PubmedArticle>");
+      for (var i = 1; i < chunks.length; i++) {
+        var pm = /<PMID[^>]*>(\d+)<\/PMID>/.exec(chunks[i]);
+        if (!pm) continue;
+        var texts = chunks[i].match(/<AbstractText[^>]*>[\s\S]*?<\/AbstractText>/g) || [];
+        var joined = texts.map(function (t) {
+          return t.replace(/<AbstractText[^>]*>/, "").replace(/<\/AbstractText>/, "").replace(/<[^>]+>/g, "");
+        }).join(" ").replace(/\s+/g, " ").trim();
+        if (joined) out[pm.group === undefined ? pm[1] : pm[1]] = joined;
+      }
+      return out;
+    }).catch(function () { return {}; });
+  }
+
+  function fromPubMed(it) {
+    if (!it || !it.uid) return null;
+    var ids = {};
+    (it.articleids || []).forEach(function (x) { ids[x.idtype] = x.value; });
+    var authors = (it.authors || []).map(function (a) { return a.name; }).filter(Boolean);
+    var pubtypes = (it.pubtype || []).filter(function (t) { return t && t !== "Journal Article"; });
+    return {
+      pmid: String(it.uid),
+      doi: (ids.doi || "").trim(),
+      t: (it.title || "").replace(/\.$/, ""),
+      v: it.source || it.fulljournalname || "",
+      d: (it.sortpubdate || it.pubdate || "").slice(0, 10).replace(/\//g, "-"),
+      au: authors.slice(0, 3).concat(authors.length > 3 ? [String(authors.length)] : []),
+      ab: "",
+      pt: pubtypes.slice(0, 3),
+      c: null, oa: false, pdf: "", fwci: null, top10: false, r: false, ty: "article", id: ""
+    };
+  }
+
+  /* ---------- OpenAlex enrichment (free, one record at a time) ---------- */
+
+  function enrich(cards) {
+    var queue = cards.filter(function (c) { return c.doi && c.c == null; });
+    queue.forEach(function (c) {
+      var hit = citeCache[c.doi];
+      if (hit && Date.now() - hit.at < 2592e6) { applyCite(c, hit.v); }
+    });
+    queue = queue.filter(function (c) { return c.c == null; });
+    var i = 0, active = 0, stop = false;
+    function next() {
+      if (stop || i >= queue.length) return;
+      var c = queue[i++];
+      active++;
+      var url = OA + encodeURIComponent(c.doi) +
+        "?select=id,cited_by_count,open_access,best_oa_location,fwci,citation_normalized_percentile,type,is_retracted&mailto=" + MAILTO;
+      fetch(url).then(function (r) {
+        if (r.status === 429) { stop = true; return null; }
+        return r.ok ? r.json() : null;
+      }).then(function (w) {
+        if (w) {
+          var cnp = w.citation_normalized_percentile || {};
+          var v = {
+            id: (w.id || "").replace("https://openalex.org/", ""),
+            c: w.cited_by_count, oa: !!(w.open_access && w.open_access.is_oa),
+            pdf: (w.best_oa_location && w.best_oa_location.pdf_url) || "",
+            fwci: w.fwci, top10: !!cnp.is_in_top_10_percent, r: !!w.is_retracted, ty: w.type || "article"
+          };
+          citeCache[c.doi] = { at: Date.now(), v: v };
+          applyCite(c, v);
+        }
+      }).catch(function () {}).then(function () {
+        active--;
+        if (i < queue.length) next();
+        else if (active === 0) writeStore("pv:cites", trimCache(citeCache));
+      });
+    }
+    var lanes = Math.min(4, queue.length);
+    for (var k = 0; k < lanes; k++) next();
+  }
+
+  function trimCache(cache) {
+    var keys = Object.keys(cache);
+    if (keys.length <= 400) return cache;
+    keys.sort(function (a, b) { return cache[b].at - cache[a].at; });
+    var out = {};
+    keys.slice(0, 400).forEach(function (k) { out[k] = cache[k]; });
     return out;
   }
-  function fmtNum(n){
-    if (n == null || isNaN(n)) return "—";
-    return Number(n).toLocaleString("en-US");
-  }
 
-  function cleanQuery(s){
-    return String(s == null ? "" : s).replace(/\s+/g, " ").trim();
-  }
-
-  function buildURL(opts){
-    /* OpenAlex search supplies ranking, while this title/abstract filter prevents papers
-       that mention a term only in body text or references from entering the result set. */
-    var strictQuery = cleanQuery(opts.q).replace(/,/g, " ");
-    var f = ["has_doi:true", "title_and_abstract.search:" + strictQuery];
-    if (opts.since)  f.push("from_publication_date:" + opts.since);
-    if (opts.oaOnly) f.push("is_oa:true");
-
-    var p = [];
-    p.push("search=" + encodeURIComponent(cleanQuery(opts.q)));
-    p.push("filter=" + encodeURIComponent(f.join(",")));
-    p.push("per-page=" + (opts.perPage || PER_PAGE));
-    p.push("page=" + (opts.page || 1));
-    p.push("select=" + SELECT);
-    p.push("mailto=" + encodeURIComponent(MAILTO));
-    if (opts.sort === "publication_date:desc") p.push("sort=publication_date%3Adesc");
-    else p.push("sort=relevance_score%3Adesc");
-    return API + "?" + p.join("&");
-  }
-
-  function abstractOf(w){
-    var inv = w.abstract_inverted_index;
-    if (!inv) return null;
-    var arr = [], term, i, pos;
-    for (term in inv){
-      if (!Object.prototype.hasOwnProperty.call(inv, term)) continue;
-      for (i = 0; i < inv[term].length; i++){
-        pos = inv[term][i];
-        arr[pos] = term;
-      }
+  function applyCite(card, v) {
+    card.id = v.id || card.id; card.c = v.c; card.oa = v.oa; card.pdf = v.pdf;
+    card.fwci = v.fwci; card.top10 = v.top10; card.r = v.r; card.ty = v.ty || card.ty;
+    var node = listEl.querySelector('[data-key="' + cssKey(cardKey(card)) + '"]');
+    if (node && node.isConnected) {
+      var tagBox = node.querySelector(".tags");
+      if (tagBox) tagBox.innerHTML = tagsHTML(card);
+      node.setAttribute("data-oa", card.oa ? "1" : "0");
     }
-    var s = arr.join(" ").replace(/\s+/g," ").trim();
-    return s.length ? s : null;
+    if (state.sort === "cited") scheduleResort();
   }
 
-  function authorsOf(w){
-    var a = (w.authorships || []).map(function(x){
-      return x.raw_author_name || ((x.author && x.author.display_name) ? x.author.display_name : null);
-    }).filter(Boolean);
-    if (!a.length) return "Authors not listed in source record";
-    if (a.length <= 4) return a.join(", ");
-    return a.slice(0,3).join(", ") + ", … " + a[a.length-1] + " (" + a.length + " authors)";
+  var resortTimer = null;
+  function scheduleResort() {
+    clearTimeout(resortTimer);
+    resortTimer = setTimeout(function () { render(); }, 700);
   }
 
-  function venueOf(w){
-    var loc = w.primary_location;
-    if (loc && loc.raw_source_name) return loc.raw_source_name;
-    if (loc && loc.source && loc.source.display_name) return loc.source.display_name;
-    return null;
-  }
+  /* ---------- rendering ---------- */
 
-  function bareDoiOf(value){
-    return value ? String(value).replace(/^https?:\/\/(dx\.)?doi\.org\//i, "").trim().toLowerCase() : "";
-  }
+  function cardKey(c) { return c.doi || ("pmid:" + c.pmid); }
+  function cssKey(k) { return String(k).replace(/"/g, "&quot;"); }
 
-  function plainText(value){
-    return String(value == null ? "" : value).replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
-  }
-
-  function titleKey(value){
-    return plainText(value).toLowerCase().replace(/[^a-z0-9\u00c0-\u024f\u4e00-\u9fff]+/g, " ").trim();
-  }
-
-  function dedupeWorks(results, reset){
-    if (reset) state.seen = {};
-    return (results || []).filter(function(w){
-      var doi = bareDoiOf(w.doi);
-      var key = doi ? "doi:" + doi : "title:" + titleKey(w.display_name);
-      if (!key || state.seen[key]) return false;
-      state.seen[key] = true;
-      return true;
+  function tagsHTML(c) {
+    var out = [];
+    var rel = relDate(c.d);
+    if (rel) out.push('<span class="tag new">' + esc(rel) + "</span>");
+    /* A paper with no citations yet says nothing useful, and OpenAlex percentiles for
+       such papers are noise, so neither is shown until there is something to show. */
+    if (c.c) out.push('<span class="tag cite">' + fmtNum(c.c) + " citation" + (c.c === 1 ? "" : "s") + " · OpenAlex</span>");
+    if (c.c >= 5 && c.top10) out.push('<span class="tag top">Top 10% in field</span>');
+    if (c.c >= 5 && c.fwci != null && c.fwci > 0) out.push('<span class="tag">FWCI ' + (Math.round(c.fwci * 10) / 10) + "</span>");
+    if (c.oa) out.push('<span class="tag oa">' + (c.pdf ? "Open access PDF" : "Open access") + "</span>");
+    if (c.r) out.push('<span class="tag warn">Retracted</span>');
+    (c.pt || []).forEach(function (t) {
+      var label = STUDY_TAGS[t];
+      if (label) out.push('<span class="tag design">' + esc(label) + "</span>");
     });
-  }
-
-  function crossrefAuthors(item){
-    var names = (item.author || []).map(function(a){
-      return [a.given, a.family].filter(Boolean).join(" ").trim();
-    }).filter(Boolean);
-    if (!names.length) return null;
-    if (names.length <= 4) return names.join(", ");
-    return names.slice(0,3).join(", ") + ", … " + names[names.length-1] + " (" + names.length + " authors)";
-  }
-
-  function crossrefYear(item){
-    var parts = item.published && item.published["date-parts"] && item.published["date-parts"][0];
-    return parts && parts[0] ? String(parts[0]) : null;
-  }
-
-  function citationOf(item, card){
-    var authorList = (item && item.author || []).map(function(a){
-      return [a.family, a.given].filter(Boolean).join(", ");
-    }).filter(Boolean);
-    if (authorList.length > 6) authorList = authorList.slice(0,6).concat(["et al."]);
-    var authors = authorList.length ? authorList.join("; ") : card.querySelector(".au").textContent.trim();
-    var year = item ? crossrefYear(item) : null;
-    var title = item && item.title && item.title[0] ? plainText(item.title[0]) : plainText(card.querySelector(".t").textContent);
-    var venue = item && item["container-title"] && item["container-title"][0] ? plainText(item["container-title"][0]) : (card.querySelector(".venue") ? card.querySelector(".venue").textContent.trim() : "");
-    if (item){
-      var volumeIssue = item.volume ? String(item.volume) + (item.issue ? "(" + item.issue + ")" : "") : "";
-      var locator = [volumeIssue, item.page ? String(item.page) : ""].filter(Boolean).join(":");
-      if (locator) venue += (venue ? " " : "") + locator;
+    if (c.c == null && !c.doi) out.push('<span class="tag">No DOI registered</span>');
+    if (c.lens && (state.mode === "snapshot" || state.mode === "saved")) {
+      var l = LENSES.filter(function (x) { return x.key === c.lens; })[0];
+      if (l) out.push('<span class="tag">via ' + esc(l.label) + "</span>");
     }
-    var doi = card.getAttribute("data-doi");
-    return [authors, year ? "(" + year + ")." : "", title + ".", venue ? venue + "." : "", doi ? "https://doi.org/" + doi : ""].filter(Boolean).join(" ").replace(/\s+/g," ").trim();
+    return out.join("");
   }
 
-  function cardHTML(w, idx){
-    var doi = w.doi || null;
-    var href = doi || (w.id || "#");
-    var venue = venueOf(w);
-    var abs = abstractOf(w);
-    var isOA = w.open_access && w.open_access.is_oa;
+  function cardHTML(c, idx) {
+    var key = cardKey(c);
+    var url = c.doi ? "https://doi.org/" + c.doi : "https://pubmed.ncbi.nlm.nih.gov/" + c.pmid + "/";
+    var authors = (c.au || []).slice();
+    var extra = null;
+    if (authors.length && /^\d+$/.test(authors[authors.length - 1])) extra = authors.pop();
+    var byline = authors.length
+      ? esc(authors.join(", ")) + (extra ? ' <span class="dot">and ' + (Number(extra) - authors.length) + " more</span>" : "")
+      : '<span class="dot">Byline unavailable</span>';
+    var links = [];
+    if (c.doi) links.push('<a href="https://doi.org/' + esc(c.doi) + '" target="_blank" rel="noopener">DOI</a>');
+    if (c.pmid) links.push('<a href="https://pubmed.ncbi.nlm.nih.gov/' + esc(c.pmid) + '/" target="_blank" rel="noopener">PubMed</a>');
+    if (c.pdf) links.push('<a href="' + esc(c.pdf) + '" target="_blank" rel="noopener">Free PDF</a>');
+    if (c.id) links.push('<a href="https://openalex.org/' + esc(c.id) + '" target="_blank" rel="noopener">OpenAlex</a>');
+    links.push('<button type="button" data-act="cite" data-key="' + esc(key) + '">Copy citation</button>');
+    links.push('<button type="button" data-act="save" data-key="' + esc(key) + '">' + (isSaved(key) ? "Saved ✓" : "Save") + "</button>");
+    if (c.ab) links.push('<button type="button" data-act="abs" aria-expanded="false" aria-controls="ab' + idx + '">Show abstract</button>');
 
-    var bareDoi = bareDoiOf(doi);
-
-    var tags = "";
-    if (venue) tags += '<span class="tag venue" title="' + esc(venue) + '">' + esc(venue) + '</span>';
-    if (w.publication_year) tags += '<span class="tag num year">' + esc(w.publication_year) + '</span>';
-    /* Indexes disagree on citation counts, so each is shown with its source named. */
-    tags += '<span class="tag cite num">' + fmtNum(w.cited_by_count) + ' <s>OpenAlex</s></span>';
-    if (bareDoi) tags += '<span class="tag cite num xref" data-doi="' + esc(bareDoi) + '" hidden></span>';
-    if (bareDoi) tags += '<span class="tag verified" hidden>Crossref registered</span>';
-    if (bareDoi) tags += '<span class="tag source xrefstatus" hidden></span>';
-    if (isOA) tags += '<span class="tag oa">Open access</span>';
-    if (w.is_retracted) tags += '<span class="tag warn">Retracted</span>';
-    if (w.type) tags += '<span class="tag">' + esc(String(w.type).replace(/-/g," ")) + '</span>';
-    if (w.id) tags += '<a class="tag source" target="_blank" rel="noopener" href="' + esc(w.id) + '">OpenAlex record &#8599;</a>';
-    if (bareDoi) tags += '<a class="tag source" target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/?term=' + encodeURIComponent(bareDoi) + '">PubMed &#8599;</a>';
-    tags += '<a class="tag scholar" target="_blank" rel="noopener" href="https://scholar.google.com/scholar?q=' +
-            encodeURIComponent(String(w.display_name || "").replace(/<[^>]*>/g, "")) +
-            '">Scholar &#8599;</a>';
-
-    var absBlock = "";
-    if (abs){
-      var short = abs.length > 420 ? abs.slice(0,420) + "…" : abs;
-      absBlock =
-        '<div class="ab" id="ab' + idx + '">' + rich(short) + '</div>' +
-        '<button class="more" type="button" data-ab="ab' + idx + '">Show abstract</button>';
-    }
-
-    return '' +
-      '<article class="card" data-doi="' + esc(bareDoi) + '" data-openalex="' + esc(w.id || "") + '">' +
-        '<a class="t" href="' + esc(href) + '" target="_blank" rel="noopener">' + rich(w.display_name || "Untitled record") + '</a>' +
-        '<div class="au">' + esc(authorsOf(w)) + '</div>' +
-        '<div class="ln">' + tags + '</div>' +
-        absBlock +
-        (doi ? '<div class="card-actions"><span class="doi">' + esc(doi) + '</span><button class="copycite" type="button">Copy citation</button></div>' : '') +
-      '</article>';
+    return '<article class="card" data-key="' + esc(key) + '" data-oa="' + (c.oa ? "1" : "0") + '">' +
+      '<div class="chead">' +
+        '<input class="pick" type="checkbox" data-act="pick" data-key="' + esc(key) + '"' + (selected[key] ? " checked" : "") +
+          ' aria-label="Select this record for export">' +
+        '<div style="min-width:0;flex:1">' +
+          '<h3 class="t-wrap"><a class="t" href="' + esc(url) + '" target="_blank" rel="noopener">' + rich(c.t || "Untitled record") + "</a></h3>" +
+          '<p class="au">' + byline + "</p>" +
+          '<p class="meta">' + (c.v ? '<span class="v">' + esc(c.v) + "</span>" : "") +
+            (c.d ? ' <span class="dot">·</span> <span>' + esc(niceDate(c.d)) + "</span>" : "") + "</p>" +
+          '<div class="tags">' + tagsHTML(c) + "</div>" +
+          '<div class="links">' + links.join("") + "</div>" +
+          '<p class="ab' + (c.ab ? "" : " none") + '" id="ab' + idx + '">' + rich(c.ab || "") + "</p>" +
+        "</div>" +
+      "</div></article>";
   }
 
-  /* Crossref verifies the DOI and supplies registration metadata. OpenAlex remains the
-     discovery layer; Crossref corrects display fields only when it has a matching record. */
-  function enrichWithCrossref(runId){
-    var pending = [].slice.call(listEl.querySelectorAll(".card[data-doi]:not([data-crossref])"));
-    if (!pending.length) return;
-    var batch = pending.slice(0, 40);
-    var filter = batch.map(function(card){ return "doi:" + card.getAttribute("data-doi"); }).join(",");
-    var url = "https://api.crossref.org/works?filter=" + encodeURIComponent(filter) +
-              "&rows=" + batch.length + "&select=DOI,is-referenced-by-count,title,container-title,published,author,volume,issue,page" +
-              "&mailto=" + encodeURIComponent(MAILTO);
-    if (crossrefController) crossrefController.abort();
-    crossrefController = typeof AbortController !== "undefined" ? new AbortController() : null;
-    fetch(url, crossrefController ? {signal:crossrefController.signal} : undefined)
-      .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function(j){
-        if (runId !== requestSeq) return;
-        var byDoi = {};
-        ((j.message && j.message.items) || []).forEach(function(it){
-          if (it.DOI) byDoi[bareDoiOf(it.DOI)] = it;
-        });
-        batch.forEach(function(card){
-          if (!card.isConnected) return;
-          card.setAttribute("data-crossref","checked");
-          var item = byDoi[bareDoiOf(card.getAttribute("data-doi"))];
-          if (!item){
-            var missing = card.querySelector(".xrefstatus");
-            if (missing){
-              missing.textContent = "Not found in Crossref";
-              missing.hidden = false;
-            }
-            return;
-          }
-          var xref = card.querySelector(".xref");
-          if (xref && item["is-referenced-by-count"] != null){
-            xref.innerHTML = fmtNum(item["is-referenced-by-count"]) + ' <s>Crossref</s>';
-            xref.hidden = false;
-          }
-          var verified = card.querySelector(".verified");
-          if (verified) verified.hidden = false;
-          var authors = crossrefAuthors(item);
-          if (authors && card.querySelector(".au")) card.querySelector(".au").textContent = authors;
-          var venue = item["container-title"] && item["container-title"][0];
-          if (venue){
-            var venueEl = card.querySelector(".venue");
-            if (!venueEl && card.querySelector(".ln")){
-              venueEl = document.createElement("span");
-              venueEl.className = "tag venue";
-              card.querySelector(".ln").insertBefore(venueEl, card.querySelector(".ln").firstChild);
-            }
-            if (venueEl){
-              venueEl.textContent = plainText(venue);
-              venueEl.title = plainText(venue);
-            }
-          }
-          var year = crossrefYear(item);
-          if (year){
-            var yearEl = card.querySelector(".year");
-            if (!yearEl && card.querySelector(".ln")){
-              yearEl = document.createElement("span");
-              yearEl.className = "tag num year";
-              card.querySelector(".ln").appendChild(yearEl);
-            }
-            if (yearEl) yearEl.textContent = year;
-          }
-          var title = item.title && item.title[0];
-          if (title && card.querySelector(".t")) card.querySelector(".t").innerHTML = rich(title);
-          card.setAttribute("data-citation", citationOf(item, card));
-        });
-      })
-      .catch(function(e){
-        if (e && e.name === "AbortError") return;
-        batch.forEach(function(card){
-          if (!card.isConnected) return;
-          card.setAttribute("data-crossref","unavailable");
-          var status = card.querySelector(".xrefstatus");
-          if (status){
-            status.textContent = "Crossref check unavailable";
-            status.hidden = false;
-          }
-        });
+  function visibleItems() {
+    var items = state.items.slice();
+    if (state.oaOnly) items = items.filter(function (c) { return c.oa; });
+    if (state.sort === "cited") {
+      items.sort(function (a, b) {
+        var ac = a.c == null ? -1 : a.c, bc = b.c == null ? -1 : b.c;
+        return bc - ac;
       });
-  }
-
-  function setLoading(on, append){
-    state.loading = on;
-    goBtn.disabled = on && !append;
-    goBtn.textContent = on && !append ? "Searching…" : "Search";
-    moreBtn.disabled = on && append;
-    moreBtn.textContent = on && append ? "Loading…" : "Load more";
-    if (on && !append){
-      listEl.innerHTML = '<div class="skel"></div><div class="skel"></div><div class="skel"></div>';
-      moreBtn.style.display = "none";
+    } else if (state.sort === "date") {
+      items.sort(function (a, b) { return String(b.d || "").localeCompare(String(a.d || "")); });
     }
+    return items;
   }
 
-  function showError(msg){
-    listEl.innerHTML = '<div class="state err">' + esc(msg) + '</div>';
-    countEl.textContent = "";
-    moreBtn.style.display = "none";
+  function render() {
+    var items = visibleItems();
+    if (!items.length) {
+      listEl.innerHTML = '<p class="empty">Nothing matched. Try a shorter phrase, widen the window to “All time”, ' +
+        "or switch off “Open access only”.</p>";
+    } else {
+      listEl.innerHTML = items.map(cardHTML).join("");
+    }
+    countEl.textContent = state.total
+      ? fmtNum(state.total) + " record" + (state.total === 1 ? "" : "s") + " · showing " + items.length
+      : items.length + " shown";
+    moreBtn.style.display = (state.mode === "live" && state.items.length < state.total) ? "block" : "none";
+    updateExportBar();
   }
 
-  function copyText(value){
-    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(value);
-    return new Promise(function(resolve, reject){
-      var box = document.createElement("textarea");
-      box.value = value;
-      box.setAttribute("readonly", "");
-      box.style.position = "fixed";
-      box.style.opacity = "0";
-      document.body.appendChild(box);
-      box.select();
-      try {
-        if (!document.execCommand("copy")) throw new Error("Copy command was rejected");
-        resolve();
-      } catch (err){ reject(err); }
-      document.body.removeChild(box);
-    });
+  function setLoading(on, append) {
+    state.loading = on;
+    listEl.setAttribute("aria-busy", on ? "true" : "false");
+    if (on && !append) {
+      listEl.innerHTML = '<div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>';
+    }
+    moreBtn.disabled = on;
+    moreBtn.textContent = on ? "Loading…" : "Load 25 more";
   }
 
-  function syncURL(){
-    if (!window.history || !window.history.replaceState) return;
-    var u = new URL(window.location.href);
-    u.searchParams.set("q", state.q);
-    if (sortEl.value === "relevance") u.searchParams.delete("sort");
-    else u.searchParams.set("sort", sortEl.value);
-    if (sinceEl.value) u.searchParams.set("since", sinceEl.value);
-    else u.searchParams.delete("since");
-    if (oaEl.checked) u.searchParams.set("oa", "1");
-    else u.searchParams.delete("oa");
-    window.history.replaceState(null, "", u.pathname + "?" + u.searchParams.toString() + u.hash);
+  /* ---------- search ---------- */
+
+  function autoPhrase(raw) {
+    var q = raw.trim().replace(/\s+/g, " ");
+    if (!q) return { term: "", phrase: null };
+    var hasSyntax = /["()\[\]]|\bAND\b|\bOR\b|\bNOT\b/.test(q);
+    if (!hasSyntax && q.indexOf(" ") > -1 && !state.loosen) {
+      return { term: '"' + q + '"' + TA, phrase: q };
+    }
+    return { term: hasSyntax ? q : q + TA, phrase: null };
   }
 
-  function run(query, opts){
+  function run(opts) {
     opts = opts || {};
     var append = !!opts.append;
-    query = cleanQuery(query);
-    if (!query){ qEl.focus(); return; }
-    if (searchController) searchController.abort();
-    if (crossrefController) crossrefController.abort();
-    searchController = typeof AbortController !== "undefined" ? new AbortController() : null;
-    var runId = ++requestSeq;
-    var targetPage = append ? state.page + 1 : 1;
-    state.q = query;
-    if (!append) state.seen = {};
+    var lens = state.lens ? LENSES.filter(function (l) { return l.key === state.lens; })[0] : null;
+    var built = lens ? { term: lens.q, phrase: null } : autoPhrase(state.q);
+    if (!built.term) { showSnapshot(); return; }
+    state.phrase = built.phrase;
+    $("phraseNote").className = "phrase" + (built.phrase ? " show" : "");
+    $("phraseText").textContent = built.phrase || "";
+
+    var wantedLabel = lens ? lens.label : (built.phrase ? '"' + built.phrase + '"' : state.q);
+    var my = ++seq;
+    if (controller) controller.abort();
+    controller = ("AbortController" in window) ? new AbortController() : null;
+    var signal = controller ? controller.signal : undefined;
+
+    state.mode = "live";
+    state.showingSaved = false;
+    if (!append) { state.items = []; state.start = 0; }
     setLoading(true, append);
+    setStatus("", "PubMed", "Searching PubMed…");
 
-    var url = buildURL({
-      q: query,
-      page: targetPage,
-      sort: sortEl.value,
-      since: sinceEl.value,
-      oaOnly: oaEl.checked
-    });
-
-    fetch(url, searchController ? {signal:searchController.signal} : undefined)
-      .then(function(r){
-        if (!r.ok) throw new Error("OpenAlex responded with status " + r.status);
-        return r.json();
-      })
-      .then(function(j){
-        if (runId !== requestSeq) return;
-        setLoading(false, append);
-        var results = dedupeWorks(j.results || [], false);
-        if (sortEl.value === "page_citations"){
-          results.sort(function(a,b){ return (b.cited_by_count || 0) - (a.cited_by_count || 0); });
-        }
-        state.page = targetPage;
-        state.total = (j.meta && j.meta.count) || 0;
-
-        titleEl.textContent = state.activeLens ? state.activeLens : "Results";
-        var already = append ? listEl.querySelectorAll(".card").length : 0;
-        countEl.textContent = fmtNum(state.total) + " DOI-bearing records in OpenAlex" +
-          (state.total > 0 ? " · showing " + fmtNum(already + results.length) : "") +
-          (sortEl.value === "page_citations" ? " · current relevance page ordered by OpenAlex citations" : "");
-
-        if (!results.length && !append){
-          listEl.innerHTML = '<div class="state">Nothing matched that query in OpenAlex. ' +
-            'Try broader wording, quote an exact phrase, or clear the year and open access filters.</div>';
-          moreBtn.style.display = "none";
-          syncURL();
-          return;
-        }
-        var base = already;
-        var html = results.map(function(w,i){ return cardHTML(w, base + i); }).join("");
-        if (append) listEl.insertAdjacentHTML("beforeend", html);
-        else listEl.innerHTML = html;
-
-        enrichWithCrossref(runId);
-        moreBtn.style.display = (state.page * PER_PAGE < state.total) ? "block" : "none";
-        syncURL();
-      })
-      .catch(function(e){
-        if (e && e.name === "AbortError") return;
-        if (runId !== requestSeq) return;
-        setLoading(false, append);
-        if (append){
-          moreBtn.style.display = "block";
-          moreBtn.textContent = "Retry loading more";
-          return;
-        }
-        showError("Could not reach OpenAlex just now (" + e.message + "). The service may be busy, or the network blocked the request. Please try again.");
+    var slowTimer = setTimeout(function () {
+      if (my === seq && state.loading) setStatus("warn", "PubMed", "Still waiting on PubMed…", {
+        label: "Cancel", fn: function () { if (controller) controller.abort(); setLoading(false); setStatus("warn", "PubMed", "Search cancelled."); }
       });
+    }, 4000);
+
+    searchPubMed(built.term, { scope: state.scope, sort: state.sort, start: state.start }, signal)
+      .then(function (res) {
+        if (my !== seq) return;
+        clearTimeout(slowTimer);
+        var fresh = res.items.filter(function (c) {
+          var k = cardKey(c);
+          return !state.items.some(function (x) { return cardKey(x) === k; });
+        });
+        state.items = state.items.concat(fresh);
+        state.total = res.total;
+        state.start += PAGE;
+        setLoading(false);
+        render();
+        titleEl.textContent = wantedLabel;
+        document.title = wantedLabel + " · Panvascular Radar";
+        announce(fmtNum(res.total) + " records found; showing " + state.items.length + ".");
+        setStatus("", "PubMed", scopeSentence() + " Citation counts load from OpenAlex.");
+        enrich(state.items);
+        if (res.ids && res.ids.length) {
+          fetchAbstracts(res.ids, signal).then(function (map) {
+            if (my !== seq) return;
+            var touched = false;
+            state.items.forEach(function (c) {
+              if (!c.ab && map[c.pmid]) { c.ab = map[c.pmid]; touched = true; }
+            });
+            if (touched) render();
+          });
+        }
+      })
+      .catch(function (err) {
+        if (my !== seq || (err && err.name === "AbortError")) return;
+        clearTimeout(slowTimer);
+        setLoading(false);
+        var retry = { label: "Retry", fn: function () { run({ append: append }); } };
+        if (!state.items.length) {
+          /* Never leave the reader with an empty page: fall back to the baked snapshot. */
+          var wanted = wantedLabel;
+          showSnapshot();
+          setStatus("err", "Offline", "PubMed did not answer, so this is the saved snapshot rather than a live search for " +
+            wanted + ".", retry);
+        } else {
+          setStatus("err", "Offline", "PubMed did not answer, so these results may be incomplete.", retry);
+        }
+        announce("The search failed; showing saved results.");
+      });
+    syncURL();
   }
 
-  /* card actions */
-  listEl.addEventListener("click", function(e){
-    var copy = e.target.closest ? e.target.closest(".copycite") : null;
-    if (copy){
-      var card = copy.closest(".card");
-      if (!card) return;
-      var citation = card.getAttribute("data-citation") || citationOf(null, card);
-      copyText(citation).then(function(){
-        copy.textContent = "Copied";
-        window.setTimeout(function(){ copy.textContent = "Copy citation"; }, 1600);
-      }).catch(function(){
-        copy.textContent = "Copy failed";
-        window.setTimeout(function(){ copy.textContent = "Copy citation"; }, 1600);
-      });
-      return;
+  function scopeSentence() {
+    if (state.scope === "60") return "Published in the last " + (snap.days || 60) + " days.";
+    if (state.scope === "year") return "Published this year.";
+    return "All years.";
+  }
+
+  /* ---------- snapshot view ---------- */
+
+  function showSnapshot() {
+    state.mode = "snapshot";
+    state.showingSaved = false;
+    state.items = (snap.feed || []).slice();
+    state.total = state.items.length;
+    titleEl.textContent = "New at the frontier";
+    document.title = "Panvascular Radar — what is new at the medicine × engineering frontier";
+    render();
+    var d = snap.generated ? new Date(snap.generated.replace(/-/g, "/")) : null;
+    var stamp = d ? d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : "an earlier date";
+    setStatus("", "Snapshot", "The newest paper from each of the eight questions, as of " + stamp +
+      ". Pick a question or type a search to query PubMed live.");
+    enrich(state.items);
+  }
+
+  /* ---------- saved list ---------- */
+
+  function savedAll() { return readStore("pv:saved", []); }
+  function isSaved(key) { return savedAll().some(function (x) { return cardKey(x) === key; }); }
+  function toggleSave(card) {
+    var all = savedAll(), key = cardKey(card);
+    var idx = -1;
+    all.forEach(function (x, i) { if (cardKey(x) === key) idx = i; });
+    if (idx > -1) all.splice(idx, 1); else all.unshift(card);
+    writeStore("pv:saved", all.slice(0, 300));
+    $("savedN").textContent = all.length;
+    return idx === -1;
+  }
+  function showSaved() {
+    var all = savedAll();
+    state.showingSaved = true;
+    state.mode = "saved";
+    state.items = all;
+    state.total = all.length;
+    titleEl.textContent = "Saved papers";
+    render();
+    setStatus("", "This browser", all.length
+      ? "Saved on this device only. They stay here when you are offline, and they export like any other result."
+      : "Nothing saved yet. Use Save on a card, and it will be here on your next visit.");
+  }
+
+  /* ---------- export ---------- */
+
+  function selectedCards() {
+    var keys = Object.keys(selected);
+    return state.items.concat(savedAll()).filter(function (c) {
+      return selected[cardKey(c)];
+    }).filter(function (c, i, arr) {
+      return arr.findIndex(function (x) { return cardKey(x) === cardKey(c); }) === i;
+    });
+  }
+  function updateExportBar() {
+    var n = Object.keys(selected).length;
+    $("selN").textContent = n;
+    exportBar.className = "exportbar" + (n ? " show" : "");
+  }
+  function authorsFull(c) {
+    var a = (c.au || []).slice();
+    if (a.length && /^\d+$/.test(a[a.length - 1])) a.pop();
+    return a;
+  }
+  function citationText(c) {
+    var a = authorsFull(c);
+    var who = a.length ? a.join(", ") + (c.au.length > a.length ? ", et al." : "") : "";
+    var year = (c.d || "").slice(0, 4);
+    return [who, c.t, c.v ? c.v + "." : "", year ? "(" + year + ")." : "", c.doi ? "https://doi.org/" + c.doi : ""]
+      .filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
+  }
+  function toRIS(cards) {
+    return cards.map(function (c) {
+      var lines = ["TY  - JOUR", "TI  - " + c.t];
+      authorsFull(c).forEach(function (a) { lines.push("AU  - " + a); });
+      if (c.v) lines.push("JO  - " + c.v);
+      if (c.d) { lines.push("PY  - " + c.d.slice(0, 4)); lines.push("DA  - " + c.d); }
+      if (c.doi) lines.push("DO  - " + c.doi);
+      if (c.pmid) lines.push("AN  - " + c.pmid);
+      if (c.ab) lines.push("AB  - " + c.ab.replace(/\s+/g, " "));
+      if (c.doi) lines.push("UR  - https://doi.org/" + c.doi);
+      lines.push("ER  - ", "");
+      return lines.join("\r\n");
+    }).join("");
+  }
+  function toBib(cards) {
+    return cards.map(function (c, i) {
+      var a = authorsFull(c);
+      var key = ((a[0] || "anon").split(/\s+/).pop() || "anon").toLowerCase() + (c.d || "").slice(0, 4) + (i + 1);
+      var f = [];
+      f.push("  title = {" + (c.t || "") + "}");
+      if (a.length) f.push("  author = {" + a.join(" and ") + "}");
+      if (c.v) f.push("  journal = {" + c.v + "}");
+      if (c.d) f.push("  year = {" + c.d.slice(0, 4) + "}");
+      if (c.doi) f.push("  doi = {" + c.doi + "}");
+      return "@article{" + key + ",\n" + f.join(",\n") + "\n}\n";
+    }).join("\n");
+  }
+  function toCSV(cards) {
+    var head = ["title", "authors", "journal", "date", "doi", "pmid", "citations", "open_access"];
+    var rows = cards.map(function (c) {
+      return [c.t, authorsFull(c).join("; "), c.v, c.d, c.doi, c.pmid, c.c == null ? "" : c.c, c.oa ? "yes" : "no"]
+        .map(function (v) { return '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"'; }).join(",");
+    });
+    return head.join(",") + "\n" + rows.join("\n");
+  }
+  function download(name, text, type) {
+    var blob = new Blob([text], { type: type + ";charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+  }
+  function copyText(text, okMsg) {
+    var done = function () { announce(okMsg); setStatus("", "Copied", okMsg); };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else { fallback(); }
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly", "");
+      ta.style.position = "fixed"; ta.style.left = "-9999px";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); done(); } catch (e) { announce("Copying failed."); }
+      ta.remove();
     }
-    var b = e.target.closest ? e.target.closest(".more") : null;
-    if (!b) return;
-    var el = document.getElementById(b.getAttribute("data-ab"));
-    if (!el) return;
-    var on = el.classList.toggle("on");
-    b.textContent = on ? "Hide abstract" : "Show abstract";
+  }
+
+  /* ---------- URL state ---------- */
+
+  function syncURL() {
+    if (!window.history || !history.replaceState) return;
+    var u = new URL(window.location.href);
+    var p = u.searchParams;
+    p.delete("q"); p.delete("lens"); p.delete("scope"); p.delete("sort");
+    if (state.lens) p.set("lens", state.lens);
+    else if (state.q) p.set("q", state.q);
+    if (state.scope !== "60") p.set("scope", state.scope);
+    if (state.sort !== "date") p.set("sort", state.sort);
+    history.replaceState(null, "", u.pathname + (p.toString() ? "?" + p.toString() : ""));
+  }
+
+  /* ---------- wiring ---------- */
+
+  function buildLenses() {
+    var counts = snap.counts || {};
+    lensesEl.innerHTML = LENSES.map(function (l) {
+      var c = counts[l.key] || {};
+      var n = c.recent != null ? c.recent : c.total;
+      var title = c.total != null ? (fmtNum(c.recent || 0) + " in the last " + (snap.days || 60) + " days of " + fmtNum(c.total) + " all told") : "";
+      return '<button class="chip lens" type="button" data-lens="' + l.key + '" aria-pressed="false" title="' + esc(title) + '">' +
+        esc(l.label) + (n != null ? '<span class="n">' + fmtNum(n) + "</span>" : "") + "</button>";
+    }).join("");
+  }
+
+  function setLens(key) {
+    state.lens = key;
+    state.q = "";
+    qEl.value = "";
+    Array.prototype.forEach.call(lensesEl.querySelectorAll(".lens"), function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-lens") === key ? "true" : "false");
+    });
+    $("savedBtn").setAttribute("aria-pressed", "false");
+    run();
+  }
+
+  function buildTracker() {
+    var t = snap.tracker || {};
+    var stats = [
+      [fmtNum(t.count || 0), "records in PubMed"],
+      [fmtNum(t.cites || 0), "citations, OpenAlex"],
+      [t.first || "—", "earliest record"],
+      [(t.oa || 0) + " / " + (t.of || 0), "open access"]
+    ];
+    $("tstats").innerHTML = stats.map(function (s) {
+      return '<div class="tstat"><b>' + esc(s[0]) + "</b><span>" + esc(s[1]) + "</span></div>";
+    }).join("");
+    $("trackerAsOf").textContent = "Counted on " + (snap.generated ? niceDate(snap.generated) : "an earlier date") +
+      ". PubMed indexes the term; the citation total is the sum over those records in OpenAlex.";
+  }
+
+  listEl.addEventListener("click", function (ev) {
+    var btn = ev.target.closest("[data-act]");
+    if (!btn) return;
+    var act = btn.getAttribute("data-act");
+    var key = btn.getAttribute("data-key");
+    var card = state.items.concat(savedAll()).filter(function (c) { return cardKey(c) === key; })[0];
+    if (act === "abs") {
+      var p = btn.closest(".card").querySelector(".ab");
+      var open = p.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.textContent = open ? "Hide abstract" : "Show abstract";
+    } else if (act === "cite" && card) {
+      copyText(citationText(card), "Citation copied.");
+    } else if (act === "save" && card) {
+      var added = toggleSave(card);
+      btn.textContent = added ? "Saved ✓" : "Save";
+      announce(added ? "Saved to this browser." : "Removed from saved.");
+    }
   });
 
-  /* lenses */
-  var lensWrap = $("lenses");
-  LENSES.forEach(function(L){
-    var b = document.createElement("button");
-    b.type = "button";
-    b.className = "lens";
-    b.textContent = L.label;
-    b.setAttribute("aria-pressed","false");
-    b.addEventListener("click", function(){
-      Array.prototype.forEach.call(lensWrap.querySelectorAll(".lens"), function(x){
+  listEl.addEventListener("change", function (ev) {
+    var box = ev.target.closest('input[data-act="pick"]');
+    if (!box) return;
+    var key = box.getAttribute("data-key");
+    if (box.checked) selected[key] = true; else delete selected[key];
+    box.closest(".card").classList.toggle("sel", box.checked);
+    updateExportBar();
+  });
+
+  exportBar.addEventListener("click", function (ev) {
+    var b = ev.target.closest("[data-export]");
+    if (!b) return;
+    var kind = b.getAttribute("data-export");
+    var cards = selectedCards();
+    if (kind === "clear") { selected = Object.create(null); render(); return; }
+    if (!cards.length) return;
+    if (kind === "ris") download("panvascular-radar.ris", toRIS(cards), "application/x-research-info-systems");
+    else if (kind === "bib") download("panvascular-radar.bib", toBib(cards), "application/x-bibtex");
+    else if (kind === "csv") download("panvascular-radar.csv", toCSV(cards), "text/csv");
+    else if (kind === "cite") copyText(cards.map(citationText).join("\n\n"), cards.length + " citations copied.");
+    else if (kind === "save") {
+      var all = savedAll();
+      cards.forEach(function (c) { if (!isSaved(cardKey(c))) all.unshift(c); });
+      writeStore("pv:saved", all.slice(0, 300));
+      $("savedN").textContent = savedAll().length;
+      announce(cards.length + " saved to this browser.");
+      render();
+    }
+  });
+
+  $("searchForm").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    state.q = qEl.value.trim();
+    state.lens = null;
+    state.loosen = false;
+    Array.prototype.forEach.call(lensesEl.querySelectorAll(".lens"), function (b) { b.setAttribute("aria-pressed", "false"); });
+    if (state.q) run(); else showSnapshot();
+  });
+
+  $("phraseOff").addEventListener("click", function () {
+    state.loosen = true;
+    run();
+  });
+
+  lensesEl.addEventListener("click", function (ev) {
+    var b = ev.target.closest(".lens");
+    if (b) setLens(b.getAttribute("data-lens"));
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll(".scope"), function (b) {
+    b.addEventListener("click", function () {
+      state.scope = b.getAttribute("data-scope");
+      Array.prototype.forEach.call(document.querySelectorAll(".scope"), function (x) {
         x.setAttribute("aria-pressed", x === b ? "true" : "false");
       });
-      state.activeLens = L.label;
-      qEl.value = L.q;
-      run(L.q);
-      document.querySelector(".meta").scrollIntoView({behavior:"smooth", block:"start"});
-    });
-    lensWrap.appendChild(b);
-  });
-
-  $("searchForm").addEventListener("submit", function(e){
-    e.preventDefault();
-    state.activeLens = null;
-    Array.prototype.forEach.call(lensWrap.querySelectorAll(".lens"), function(x){ x.setAttribute("aria-pressed","false"); });
-    run(qEl.value);
-  });
-  [sortEl, sinceEl, oaEl].forEach(function(el){
-    el.addEventListener("change", function(){ if (state.q) run(state.q); });
-  });
-  moreBtn.addEventListener("click", function(){ run(state.q, {append:true}); });
-  shareBtn.addEventListener("click", function(){
-    copyText(window.location.href).then(function(){
-      shareBtn.textContent = "Link copied";
-      window.setTimeout(function(){ shareBtn.textContent = "Copy search link"; }, 1600);
-    }).catch(function(){
-      shareBtn.textContent = "Copy failed";
-      window.setTimeout(function(){ shareBtn.textContent = "Copy search link"; }, 1600);
+      if (state.mode === "live") run(); else if (state.lens || state.q) run();
     });
   });
 
-  /* concept tracker: real numbers, computed from the records themselves */
-  (function tracker(){
-    var url = buildURL({ q:"suitcordance", perPage:200, sort:"publication_date:asc" });
-    fetch(url)
-      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function(j){
-        var rs = j.results || [];
-        var total = (j.meta && j.meta.count) || rs.length;
-        var cites = 0, oa = 0, first = null;
-        rs.forEach(function(w){
-          cites += (w.cited_by_count || 0);
-          if (w.open_access && w.open_access.is_oa) oa++;
-          if (w.publication_year && (first === null || w.publication_year < first)) first = w.publication_year;
-        });
-        $("tCount").textContent = fmtNum(total);
-        $("tCites").textContent = fmtNum(cites);
-        $("tFirst").textContent = first || "—";
-        $("tOA").textContent = fmtNum(oa) + " / " + fmtNum(rs.length);
-      })
-      .catch(function(){
-        $("tstats").innerHTML = '<div class="tstat" style="color:var(--ink-faint);font-size:.86rem">' +
-          'Live counts unavailable right now. Use the Suitcordance lens above to run the query directly.</div>';
-      });
-  })();
+  sortEl.addEventListener("change", function () {
+    state.sort = sortEl.value;
+    if (state.mode === "live" && state.sort === "relevance") run();
+    else { render(); syncURL(); }
+  });
 
-  /* First paint accepts shareable search parameters; otherwise show the signature lens. */
-  (function boot(){
-    var params = new URLSearchParams(window.location.search);
-    var sharedQuery = cleanQuery(params.get("q"));
-    if (sharedQuery){
-      var sharedSort = params.get("sort");
-      var sharedSince = params.get("since");
-      if (["relevance","page_citations","publication_date:desc"].indexOf(sharedSort) !== -1) sortEl.value = sharedSort;
-      if (["","2024-01-01","2022-01-01","2020-01-01"].indexOf(sharedSince || "") !== -1) sinceEl.value = sharedSince || "";
-      oaEl.checked = params.get("oa") === "1";
-      state.activeLens = null;
-      qEl.value = sharedQuery;
-      run(sharedQuery);
-      return;
+  oaEl.addEventListener("change", function () { state.oaOnly = oaEl.checked; render(); });
+
+  moreBtn.addEventListener("click", function () { if (!state.loading) run({ append: true }); });
+
+  $("savedBtn").addEventListener("click", function () {
+    var on = $("savedBtn").getAttribute("aria-pressed") !== "true";
+    $("savedBtn").setAttribute("aria-pressed", on ? "true" : "false");
+    if (on) showSaved(); else showSnapshot();
+  });
+
+  $("shareSearch").addEventListener("click", function () {
+    copyText(window.location.href, "Link copied.");
+  });
+
+  $("themeBtn").addEventListener("click", function () {
+    var dark = document.documentElement.getAttribute("data-theme") === "dark";
+    var next = dark ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    $("themeBtn").textContent = next === "dark" ? "Light" : "Dark";
+    $("themeBtn").setAttribute("aria-pressed", next === "dark" ? "true" : "false");
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", next === "dark" ? "#06121b" : "#f2f7fb");
+    writeStore("pv:theme", next);
+  });
+
+  /* ---------- boot ---------- */
+
+  (function boot() {
+    buildLenses();
+    buildTracker();
+    $("savedN").textContent = savedAll().length;
+    if (document.documentElement.getAttribute("data-theme") === "dark") {
+      $("themeBtn").textContent = "Light";
+      $("themeBtn").setAttribute("aria-pressed", "true");
     }
-    var first = LENSES[0];
-    state.activeLens = first.label;
-    qEl.value = first.q;
-    var b = lensWrap.querySelector(".lens");
-    if (b) b.setAttribute("aria-pressed","true");
-    run(first.q);
+    var p = new URLSearchParams(window.location.search);
+    var scope = p.get("scope");
+    if (scope === "year" || scope === "all") {
+      state.scope = scope;
+      Array.prototype.forEach.call(document.querySelectorAll(".scope"), function (x) {
+        x.setAttribute("aria-pressed", x.getAttribute("data-scope") === scope ? "true" : "false");
+      });
+    }
+    var sort = p.get("sort");
+    if (sort === "relevance" || sort === "cited") { state.sort = sort; sortEl.value = sort; }
+    var lens = p.get("lens");
+    var q = p.get("q");
+    showSnapshot();
+    if (lens && LENSES.some(function (l) { return l.key === lens; })) setLens(lens);
+    else if (q) { qEl.value = q; state.q = q; run(); }
   })();
-
 })();
 </script>
 </body>
